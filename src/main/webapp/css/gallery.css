@@ -1,0 +1,29 @@
+/*
+    Quinn Giebel
+    12/11/20
+*/
+
+img {
+    display: block;
+    width: fit-content;
+    margin: 1em auto;
+}
+
+.imagePair {
+    padding: 0;
+}
+
+@media screen and (min-width: 40em) {
+    .imagePair {
+        width: 100%;
+        padding: 1em;
+        text-align: center;
+    }
+
+    .imagePair img {   
+        display: inline;     
+        width: 40%;
+        margin: auto 1em;
+        vertical-align: middle;
+    }
+}
