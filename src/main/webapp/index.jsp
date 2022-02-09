@@ -49,7 +49,7 @@
                                 <h2 class="text-thin">Art Portfolio</h2>
                                 <p class="margin-bottom-30">A simple portfolio site that built with HTML and CSS. All of
                                     the art shown is my own as well.</p>
-                                <a class="button button-dark-stroke text-size-12" href="portfolio.html">GO</a>
+                                <a class="button button-dark-stroke text-size-12" href="portfolio/portfolio.html">GO</a>
                             </div>
                         </div>
                         <div class="s-12 m-12 l-4 margin-m-bottom">
