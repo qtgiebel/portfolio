@@ -1,6 +1,6 @@
-Project Plan
+# Project Plan
 
-Week 4
+## Week 4
 - [ ] create portfolio database
 - [ ] create art and user tables
 - [ ] consider using js for page creation?
