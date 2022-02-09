@@ -8,6 +8,10 @@
 *.iws
 *.iml
 
+## Too large files
+*.clip
+*.psd
+
 ## Plugin-specific files:
 
 # IntelliJ
