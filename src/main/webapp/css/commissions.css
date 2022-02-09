@@ -1,0 +1,66 @@
+/*
+    Quinn Giebel
+    12/11/20
+*/
+
+h2 {
+    margin-bottom: 0;
+}
+
+h3 {
+    padding: 0; 
+}
+
+em {
+    font-weight: bold;
+}
+
+table {
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 1em;
+    width: 90%;
+    border-collapse: collapse;
+    text-align: left;
+    font: 1.75em Garamond, serif;
+}
+
+th {
+    background-color: goldenrod;
+    border-radius: 1em 1em 0 0;
+    padding: .2em 1em;
+    text-align: center;
+}
+
+td {
+    border: solid 1px black;
+}
+
+.priceMayVary {
+    padding: 1em;
+    font: 1.5rem Garamond, serif;
+    color: grey;
+}
+
+.price {
+    width: 30%;
+    text-align: right;
+    text-shadow: 0 0 5px goldenrod;
+}
+
+@media screen and (min-width: 40em) {
+    .tablePair div {
+        display: inline-block;
+        height: auto;
+        vertical-align: middle;
+    }
+    
+    div#baseWrapper {
+        width: 30%;
+    }
+
+    div#extrasWrapper {
+        width: 50%;
+    }
+
+}

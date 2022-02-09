@@ -1,0 +1,22 @@
+/*
+    Quinn Giebel
+    12/11/20
+*/
+
+p {
+    font-size: 1.2em;
+}
+
+
+@media screen and (min-width: 40em) {
+
+    img {
+        float: right;
+        width: 45%;
+    }
+
+    footer {
+        clear: both;
+    }
+
+}

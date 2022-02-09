@@ -1,0 +1,84 @@
+/*
+    Quinn Giebel
+    12/11/20
+*/
+
+h3 {
+    padding-left: 10px;
+}
+
+p {
+    margin-top: 3px;
+    margin-bottom: 2em;
+}
+
+form {
+    max-width: 90%;
+    border-radius: 1em;
+    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
+    margin: 1em;
+    padding: 1.2em;
+    background-color: ivory;
+    font: 1.3em Garamond, serif;
+}
+
+input[type="text"] {
+    display: inline-block;
+    vertical-align: middle;
+    height: 2em;
+    margin-bottom: .5em;
+    width: 60%;
+}
+
+select {
+    width: 45%;
+    font-size: .75em;
+}
+
+fieldset, textarea, input[type="text"], select{
+    border: solid 2px goldenrod;
+    border-radius: 1em;
+}
+
+legend {
+    margin: .6em;
+}
+
+label {
+    display: inline-block;
+    margin-top: 1em;
+}
+
+.fixedWidth {
+    display: inline-block;
+    width: 30%;
+}
+
+.firstInFieldset {
+    margin-top: 0;
+}
+
+textarea {
+    width: 96%;
+    margin: 0 auto;
+}
+.button-wrapper {
+    padding-top: .75em;
+}
+
+.button-wrapper input {
+    padding: .5em;
+    margin: 0 1em;
+    font-size: .75em;
+    font-weight: bold;
+    background-color:#faf8d4;
+    border: solid 2px goldenrod;
+    border-radius: 1em;
+}
+
+@media screen and (min-width: 40em) {
+    form, article {
+        width: 60%;
+        margin: 1em auto;
+    }
+}
