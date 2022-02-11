@@ -5,6 +5,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+/**
+ * This class forwards to a jsp page.
+ *
+ * @author Quinn Giebel
+ */
 @WebServlet(name = "AddUserDisplayServlet", value = "/admin/new-user")
 public class AddUserDisplayServlet extends HttpServlet {
     @Override
