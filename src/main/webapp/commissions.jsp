@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <!--
     Author: Quinn Giebel
@@ -7,34 +9,20 @@
 
 <head>
     <title>Commissions</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/commissions.css">
+    <c:import url="default-head-tags.jsp" />
+    <link rel="stylesheet" href="css/commissions.css">
 </head>
 
 <body>
 
-    <header>
-        <a class="back-link" href="/">Back to Projects</a>
-        <h1 class="back-clear">Doodles by Q. Giebel</h1>
-        <nav>
-            <a href="portfolio.html">Home</a>
-            |
-            <a href="gallery.html">Gallery</a>
-            |
-            <a href="commissions.html">Commissions</a>
-            |
-            <a href="professionalContact.html">Contact Me</a>
-        </nav>
-    </header>
+    <c:import url="header-template.html" />
 
     <main>
         <article>
             <h2>I Do Commissions</h2>
             <hr>
             <p>
-                If you would like to commission a piece, <a href="professionalContact.html">click here</a>.
+                If you would like to commission a piece, <a href="professionalContact.jsp">click here</a>.
                 <br>
                 <br>
                 <em>Unfortunately, commissions are currently closed.</em>
@@ -98,8 +86,7 @@
         </div>
     </main>
 
-    <footer>
-    </footer>
+    <c:import url="footer-template.html" />
 
 </body>
 

@@ -7,7 +7,6 @@ p {
     font-size: 1.2em;
 }
 
-
 @media screen and (min-width: 40em) {
 
     img {
@@ -18,5 +17,4 @@ p {
     footer {
         clear: both;
     }
-
 }
