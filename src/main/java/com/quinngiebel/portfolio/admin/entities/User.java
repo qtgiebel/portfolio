@@ -1,12 +1,35 @@
 package com.quinngiebel.portfolio.admin.entities;
 
+import javax.persistence.*;
+
+/**
+ * This class is an entity to store user information.
+ *
+ * @author Quinn Giebel
+ */
+@Entity(name = "User")
+@Table(name = "users")
 public class User {
+    @Id @GeneratedValue
+    @Column(name = "user_id")
     private String userId;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "view_permission")
     private boolean viewPermission;
+
+    @Column(name = "archive_permission")
     private boolean archivePermission;
+
+    @Column(name = "remove_permission")
     private boolean removePermission;
+
+    @Column(name = "publish_permission")
     private boolean publishPermission;
 
     public User() {
