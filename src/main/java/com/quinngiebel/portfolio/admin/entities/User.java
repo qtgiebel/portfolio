@@ -1,5 +1,7 @@
 package com.quinngiebel.portfolio.admin.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -10,14 +12,15 @@ import javax.persistence.*;
 @Entity(name = "User")
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "Native")
     @Column(name = "user_id")
-    private String userId;
+    private int id;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
-    @Column(name = "password")
+    @Column
     private String password;
 
     @Column(name = "view_permission")
@@ -35,12 +38,22 @@ public class User {
     public User() {
     }
 
-    public String getUserId() {
-        return userId;
+    public User(String email, String password, boolean viewPermission, boolean archivePermission,
+                boolean removePermission, boolean publishPermission) {
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setViewPermission(viewPermission);
+        this.setArchivePermission(archivePermission);
+        this.setRemovePermission(removePermission);
+        this.setPublishPermission(publishPermission);
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int userId) {
+        this.id = userId;
     }
 
     public String getEmail() {

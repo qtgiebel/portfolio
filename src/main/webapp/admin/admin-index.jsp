@@ -11,6 +11,6 @@
 </head>
 <body>
     <p>Did the thing.</p>
-    <p><a href="/portfolio/admin/new-user">Create a new user.</a> </p>
+    <p><a href="/portfolio/admin/list">List all art pieces.</a> </p>
 </body>
 </html>
