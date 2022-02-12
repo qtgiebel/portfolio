@@ -11,5 +11,6 @@
         <property name="hibernate.c3p0.idle_test_period">3000</property>
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <mapping class="com.quinngiebel.portfolio.admin.entities.User"/>
+        <mapping class="com.quinngiebel.portfolio.admin.entities.Piece"/>
     </session-factory>
 </hibernate-configuration>
