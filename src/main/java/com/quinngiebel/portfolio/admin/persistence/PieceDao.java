@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -21,9 +22,13 @@ public class PieceDao {
 
 
 /** Create */
-    public boolean addPiece(Piece piece) {
-        //TODO hib:add piece
-        return false;
+    public Integer addPiece(Piece piece) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Integer id = (Integer)session.save(piece);
+        transaction.commit();
+        session.close();
+        return id;
     }
 
 /** Read */
@@ -74,16 +79,21 @@ public class PieceDao {
     }
 
 /** Update */
-    public void archivePiece(int id) {
-        Piece toArchive = getPieceById(id);
-
-        //TODO hib:update toArchive
+    public void archivePiece(Piece toArchive) {
+        toArchive.setIsArchived(true);
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.saveOrUpdate(toArchive);
+        transaction.commit();
+        session.close();
     }
 
 /** Delete */
-    public void deletePiece(int id) {
-        Piece toDelete = getPieceById(id);
-
-        //TODO hib:delete toDelete
+    public void deletePiece(Piece toDelete) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(toDelete);
+        transaction.commit();
+        session.close();
     }
 }
