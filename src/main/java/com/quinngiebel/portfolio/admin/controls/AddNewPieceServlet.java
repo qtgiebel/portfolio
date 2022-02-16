@@ -13,20 +13,20 @@ import java.util.List;
 public class AddNewPieceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO change success behaviour
-        String redirectURL = "/admin/success.jsp";
         String forwardURL = "/admin/admin-index.jsp";
         request.setAttribute("operation", "Add");
+        request.setAttribute("fail", false);
 
         PieceDao pieceDao = new PieceDao();
         Piece newPiece = new Piece(request.getParameter("title"), request.getParameter("location"),
                 request.getParameter("category"));
 
-        if (pieceDao.addPiece(newPiece)) {
-            response.sendRedirect(request.getServletContext() + redirectURL);
+
+        if (pieceDao.addPiece(newPiece) == null) {
+            request.setAttribute("fail", true);
         }
 
-        request.setAttribute("fail", true);
+        request.setAttribute("pieces", pieceDao.getAllPieces());
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardURL);
         dispatcher.forward(request, response);
     }
