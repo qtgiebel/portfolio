@@ -24,7 +24,7 @@ public class Database {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     // create an object of the class Database
-    private static Database instance = new Database();
+    private static final Database instance = new Database();
 
     private Properties properties;
 
@@ -90,11 +90,17 @@ public class Database {
      *
      * @param sqlFile the sql file to be read and executed line by line
      */
-    public void runSQL(String sqlFile) {
+    public boolean runSQL(String sqlFile) {
 
-        Statement stmt = null;
+        Statement stmt;
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classloader.getResourceAsStream(sqlFile);
+
+        if (inputStream == null) {
+            logger.error("Database:runSQL . . . No input found");
+            return false;
+        }
+
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -112,11 +118,12 @@ public class Database {
 
         } catch (SQLException se) {
             logger.error(se);
+            return false;
         } catch (Exception e) {
             logger.error(e);
         } finally {
             disconnect();
         }
-
+        return true;
     }
 }
