@@ -12,12 +12,21 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 public class PieceDao {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
+
+/** Create */
+    public boolean addPiece(Piece piece) {
+        //TODO hib:add piece
+        return false;
+    }
+
+/** Read */
     public List<Piece> getAllPieces(){
         Session session = sessionFactory.openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -29,19 +38,52 @@ public class PieceDao {
         return pieces;
     }
 
-    public Piece addArt(Piece piece) {
-        return null;
+    public List<Piece> getPiecesByColumn(String column, Object value) {
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Piece> query = builder.createQuery(Piece.class);
+        Root<Piece> root = query.from(Piece.class);
+
+        Expression<String> propertyPath = root.get(column);
+        query.where(builder.equal(propertyPath, value));
+
+        List<Piece> results = session.createQuery(query).getResultList();
+        session.close();
+
+        return results;
     }
 
-    public Piece getArt(int rollNo) {
-        return null;
+    public Piece getPieceById(int id) {
+        Session session = sessionFactory.openSession();
+        Piece piece = session.get(Piece.class, id);
+        session.close();
+
+        return piece;
     }
 
-    public void updateArt(Piece piece) {
-
+    public Piece getPieceByTitle(String title) {
+        return getPiecesByColumn("title", title).get(0);
     }
 
-    public void deleteStudent(Piece piece) {
+    public List<Piece> getPiecesByCategory(String category) {
+        return getPiecesByColumn("category", category);
+    }
 
+    public List<Piece> getPiecesByArchived(boolean isArchived) {
+        return getPiecesByColumn("isArchived", isArchived);
+    }
+
+/** Update */
+    public void archivePiece(int id) {
+        Piece toArchive = getPieceById(id);
+
+        //TODO hib:update toArchive
+    }
+
+/** Delete */
+    public void deletePiece(int id) {
+        Piece toDelete = getPieceById(id);
+
+        //TODO hib:delete toDelete
     }
 }
