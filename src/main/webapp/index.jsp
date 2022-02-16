@@ -22,7 +22,7 @@
             <h2>Me</h2>
             <hr>
 
-            <img src="images/portfolio/whatcha_gonna_do.jpg" alt="Self portrait of me as a wind spirit."
+            <img src="images/whatcha_gonna_do.jpg" alt="Self portrait of me as a wind spirit."
                  id="shruggingNerd">
 
             <p>
