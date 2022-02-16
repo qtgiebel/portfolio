@@ -6,24 +6,27 @@
 - [ ] consider using js for page creation?
 
 ## Week 5
-- [ ] complete user Dao
+- [ ] Complete art Dao
 - [ ] figure out the best way to store the images
-- [ ] user DAO testing
-- [ ] investigate authentication services
+- [ ] art DAO testing
+- [ ] investigate js implimentations json?
 - [ ] add to weekly plan
 
 ## Week 6
-- [ ] add new user jsp
-- [ ] view users jsp
-- [ ] sign in jsp
+- [ ] add new art jsp
+- [ ] view art jsp
 - [ ] add to weekly plan
 
 ## Week 7
-- [ ] Complete art Dao
+- [ ] complete user Dao
+
 - [ ] add to weekly plan
 
 ## Week 8
 - [ ] implement authentication
+- [ ] add new user jsp
+- [ ] view users jsp
+- [ ] sign in jsp
 - [ ] add to weekly plan
 
 ## Week 9
