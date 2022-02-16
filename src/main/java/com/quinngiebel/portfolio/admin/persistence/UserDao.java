@@ -17,7 +17,7 @@ public class UserDao {
     }
 
     public User getUser(int rollNo) {
-        return users.get(rollNo);
+        return null;
     }
 
     public void updateUser(User user) {
