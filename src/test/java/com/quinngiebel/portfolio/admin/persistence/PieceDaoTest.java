@@ -1,19 +1,15 @@
 package com.quinngiebel.portfolio.admin.persistence;
 
 import com.quinngiebel.portfolio.admin.entities.Piece;
-import com.quinngiebel.portfolio.admin.persistence.PieceDao;
-
 import com.quinngiebel.test.utilities.Database;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PieceDaoTest {
 
@@ -26,7 +22,9 @@ public class PieceDaoTest {
     @BeforeEach
     void setUp() {
         Database database = Database.getInstance();
-        database.runSQL("create_art_test.sql");
+        if(database.runSQL("create_art_test.sql")) {
+            logger.info("Database reset success");
+        }
         dao = new PieceDao();
     }
 
@@ -99,13 +97,15 @@ public class PieceDaoTest {
      */
     @Test
     void archivePieceSuccess() {
-        dao.archivePiece(1);
+        Piece toArchive = dao.getPieceById(1);
+        dao.archivePiece(toArchive);
         assertEquals(2, dao.getPiecesByArchived(true).size());
     }
 
     @Test
     void deletePieceSuccess() {
-        dao.deletePiece(1);
+        Piece toDelete = dao.getPieceById(1);
+        dao.deletePiece(toDelete);
         assertEquals(8, dao.getAllPieces().size());
     }
 }
