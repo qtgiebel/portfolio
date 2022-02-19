@@ -1,7 +1,5 @@
 package com.quinngiebel.portfolio.admin.entities;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,8 +12,9 @@ import javax.persistence.*;
 @Entity(name = "Piece")
 @Table(name = "pieces")
 public class Piece {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native",strategy = "native")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column
     private int id;
 
@@ -25,11 +24,11 @@ public class Piece {
     @Column
     private String location;
 
-    @Column
-    private String category;
-
     @Column(name = "is_archived", columnDefinition = "boolean default false")
-    private boolean isArchived;
+    private boolean archived;
+
+    @ManyToOne
+    private Category category;
 
     public Piece() {
     }
@@ -40,7 +39,7 @@ public class Piece {
      * @param location
      * @param category
      */
-    public Piece(String title, String location, String category) {
+    public Piece(String title, String location, Category category) {
         this.title = title;
         this.location = location;
         this.category = category;
@@ -53,11 +52,11 @@ public class Piece {
      * @param category
      * @param isArchived
      */
-    public Piece(String title, String location, String category, boolean isArchived) {
+    public Piece(String title, String location, Category category, boolean isArchived) {
         this.title = title;
         this.location = location;
+        this.archived = isArchived;
         this.category = category;
-        this.isArchived = isArchived;
     }
 
     /**
@@ -112,7 +111,7 @@ public class Piece {
      *
      * @return
      */
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -120,7 +119,7 @@ public class Piece {
      *
      * @param category
      */
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -129,15 +128,34 @@ public class Piece {
      * @return
      */
     public boolean isArchived() {
-        return isArchived;
+        return archived;
     }
 
     /**
      *
-     * @param isArchived
+     * @param archived
      */
-    public void setIsArchived(boolean isArchived) {
-        this.isArchived = isArchived;
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Piece piece = (Piece) o;
+
+        if (id != piece.id) return false;
+        if (category != piece.category) return false;
+        if (archived != piece.archived) return false;
+        if (!title.equals(piece.title)) return false;
+        return location.equals(piece.location);
     }
 
     /**
@@ -150,8 +168,8 @@ public class Piece {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +
-                ", category='" + category + '\'' +
-                ", isArchived=" + isArchived +
+                ", category='[" + category.toString() + "]'" +
+                ", isArchived=" + archived +
                 '}';
     }
 }
