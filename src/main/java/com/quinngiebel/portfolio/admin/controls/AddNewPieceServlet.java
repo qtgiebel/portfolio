@@ -2,12 +2,12 @@ package com.quinngiebel.portfolio.admin.controls;
 
 import com.quinngiebel.portfolio.admin.entities.Piece;
 import com.quinngiebel.portfolio.admin.persistence.PieceDao;
+import com.quinngiebel.portfolio.admin.persistence.CategoryDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "AddNewPieceServlet", value = "/admin/add-piece")
 public class AddNewPieceServlet extends HttpServlet {
@@ -18,8 +18,9 @@ public class AddNewPieceServlet extends HttpServlet {
         request.setAttribute("fail", false);
 
         PieceDao pieceDao = new PieceDao();
+        CategoryDao categoryDao = new CategoryDao();
         Piece newPiece = new Piece(request.getParameter("title"), request.getParameter("location"),
-                request.getParameter("category"));
+                categoryDao.getCategoryByCategoryName(request.getParameter("category")));
 
 
         if (pieceDao.addPiece(newPiece) == null) {
