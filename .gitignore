@@ -2,7 +2,6 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 .DS_Store*
 # User-specific stuff:
-/.idea/
 /docs/screenshots/help
 
 ## File-based project format:
@@ -17,6 +16,10 @@
 
 # IntelliJ
 /out/
+/.idea/
+
+# VSCode
+/.vscode/
 
 # Maven
 /target/
