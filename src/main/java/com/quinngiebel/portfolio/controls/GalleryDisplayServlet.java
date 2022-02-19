@@ -14,7 +14,8 @@ import java.io.IOException;
 public class GalleryDisplayServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String forwardUrl = "/gallery.jsp";
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardUrl);
