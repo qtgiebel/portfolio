@@ -1,6 +1,5 @@
 package com.quinngiebel.test.utilities;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+
 /**
  * Provides access the database
  * Created on 8/31/16.
@@ -39,7 +39,7 @@ public class Database {
     private void loadProperties() {
         properties = new Properties();
         try {
-            properties.load (this.getClass().getResourceAsStream("/database.properties"));
+            properties.load(this.getClass().getResourceAsStream("/database.properties"));
         } catch (IOException ioe) {
             System.out.println("Database.loadProperties()...Cannot load the properties file");
             ioe.printStackTrace();
@@ -70,7 +70,8 @@ public class Database {
         }
 
         String url = properties.getProperty("url");
-        connection = DriverManager.getConnection(url, properties.getProperty("username"),  properties.getProperty("password"));
+        connection = DriverManager.getConnection(url, properties.getProperty("username"),
+                properties.getProperty("password"));
     }
 
     public void disconnect() {
@@ -107,13 +108,15 @@ public class Database {
             connect();
             stmt = connection.createStatement();
 
-            while (true) {
-                String sql = br.readLine();
-                if (sql == null) {
-                    break;
-                }
-                stmt.executeUpdate(sql);
+            StringBuilder rawSQL = new StringBuilder();
+            while (br.ready()) {
+                rawSQL.append(br.readLine());
+            }
 
+            String[] sql = rawSQL.toString().split(";");
+
+            for (String query : sql) {
+                stmt.executeUpdate(query + ";");
             }
 
         } catch (SQLException se) {
