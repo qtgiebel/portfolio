@@ -1,47 +1,87 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<!--
+    <!DOCTYPE html>
+    <!--
     Author: Quinn Giebel
     Date: 12/11/20
 -->
-<html lang="en">
+    <html lang="en">
 
-<head>
-    <title>Doodles by Q. Giebel</title>
-    <c:import url="default-head-tags.jsp" />
-    <link rel="stylesheet" href="css/index.css">
-</head>
+    <head>
+        <title>Gallery</title>
+        <c:import url="default-head-tags.jsp" />
+        <link rel="stylesheet" href="css/gallery.css">
 
-<body>
+    </head>
 
-    <c:import url="header-template.html" />
+    <body>
 
-    <main>
-        <article>
-            <h2>Me</h2>
-            <hr>
+        <c:import url="header-template.html" />
 
-            <img src="images/whatcha_gonna_do.jpg" alt="Self portrait of me as a wind spirit."
-                 id="shruggingNerd">
+        <main>
+            <div id="animations">
+                <h2>Animation</h2>
+                <hr>
+                <div class="imagePair">
+                    <img src="images/animation/bouncy-boy.gif" alt="Animation of a bouncing ball.">
+                    <img src="images/animation/baseball.gif" alt="Animation of baseball pitch.">
+                </div>
+                <hr>
+            </div>
 
-            <p>
-                I am pretty new to art, but I love it. I'm trying to eventually make art my career.
-                <br>
-                As you'll see I'm not very good yet, but that's why I do web development.
-                <br>
-                Professional art is the goal, not the next step.
-                <br>
-                <br>
-                But, hey, gotta start somewhere.
-            </p>
-        </article>
+            <div id="paintings">
+                <h2>Paintings</h2>
+                <hr>
+                <div class="imagePair">
+                    <img src="images/paintings/ship-on-the-water-doodle.jpg"
+                        alt="It's a ship on some water. Looks like there's a water funnel in the background.">
+                    <img src="images/paintings/california_hills_2020.png" alt="It's California when it was on fire.">
+                </div>
+                <hr>
+            </div>
 
+            <div id="props">
+                <h2>Prop Design</h2>
+                <hr>
+                <div class="imagePair">
+                    <img src="images/props/necronomicon-doodle.jpg"
+                        alt="It's the necronomicon from the cult-classic film franchise, Evil Dead.">
+                    <img src="images/props/lighter_doodle.jpg" alt="A lighter. It's pretty close to empty.">
+                </div>
 
-    </main>
+                <div class="imagePair">
+                    <img src="images/props/taser-gauntlet.jpg" alt="A gauntlet taser with contacts on each knuckle.">
+                    <img src="images/props/mag-glove.jpg"
+                        alt="Similar to the taser gauntlet. This one has a pad of contacts on the palm.">
+                </div>
 
-    <c:import url="footer-template.html" />
+                <div class="imagePair">
+                    <img src="images/props/cryopod.jpg" alt="Quasi-futuristic cryopod.">
 
-</body>
+                </div>
+                <hr>
+            </div>
 
-</html>
+            <div id="other">
+                <h2>Other Work</h2>
+                <hr>
+                <div class="imagePair">
+                    <img src="images/studies/fish_eye_lens_practice.jpg"
+                        alt="There's a guy looking at a forest, and it has a fish eye lens effect.">
+                    <img src="images/studies/worshipers_in_cave.jpg"
+                        alt="Just some dudes in a cave looking at an electric crystal.">
+                </div>
+
+                <div class="imagePair">
+                    <img src="images/studies/portrait_with_weird_eyes.jpg" alt="A portrait with weird looking eyes.">
+                    <img src="images/studies/picaso_lookin_faces-doodles.jpg" alt="Some faces.">
+                </div>
+                <hr>
+            </div>
+        </main>
+
+        <c:import url="footer-template.html" />
+
+    </body>
+
+    </html>
