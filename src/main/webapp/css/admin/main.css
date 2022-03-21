@@ -1,0 +1,55 @@
+/* extend the body to at least the height of the viewport 
+Based off of SO thread: https://stackoverflow.com/a/23986464*/
+* {
+    padding:0;
+    margin:0;
+}
+
+html, body, .max-height {
+    height:100%;
+    
+    padding:0;
+    margin:0;
+
+    display:flex;
+    flex-direction:column;
+}
+
+body > * {
+    flex-shrink: 0;
+}
+
+.run-to-bottom {
+    padding:0;
+    margin:0;
+    flex-grow: 1;
+}
+/* modify thumbnail to fit image correctly */
+.img-thumbnail {
+    max-width: 10em;
+}
+
+.img-thumbnail img {
+    max-width: 75%;
+}
+
+/* remove list bullets */
+ul {
+    list-style-type: none;
+}
+
+/* Rounds the corners of the category display panel */
+.rounded-corners {
+    border-radius: .25em;
+}
+
+li {
+    margin-top: auto;
+}
+
+/* test classes */
+
+
+section {
+    background-color: mediumaquamarine;
+}
