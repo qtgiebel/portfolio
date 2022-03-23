@@ -31,6 +31,8 @@ public class GenericDaoTest {
         dao = new GenericDao(User.class);
     }
 
+    /* SUCCESS */
+
     /**
      * Verifies that an entity is added.
      */
@@ -77,4 +79,6 @@ public class GenericDaoTest {
         dao.delete(toDelete);
         assertEquals(1, dao.getAll().size());
     }
+
+    /* FAILURE */
 }

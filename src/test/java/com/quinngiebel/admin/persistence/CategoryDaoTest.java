@@ -23,6 +23,8 @@ public class CategoryDaoTest {
         categoryDao = new CategoryDao();
     }
 
+    /* SUCCESS */
+
     /**
      * Verifies dao type is set correctly.
      */
@@ -30,4 +32,10 @@ public class CategoryDaoTest {
     void setTypeSuccess() {
         assertEquals(Category.class, categoryDao.getType());
     }
+
+    /* FAILURE */
+
 }
+
+
+
