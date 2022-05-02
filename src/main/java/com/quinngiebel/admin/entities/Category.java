@@ -45,6 +45,11 @@ public class Category {
         this.pieces = pieces;
     }
 
+    /**
+     * Determines if another Object is equal to this instance of Category.
+     * @param o The Object being verified.
+     * @return True if the instances are equivalent and false if they are not.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -56,11 +61,24 @@ public class Category {
         return name.equals(category.name);
     }
 
+    /**
+     * Returns a String representation of a category.
+     * @return A String representation of a category.
+     */
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    /**
+     * Returns a JSON representation of a category.
+     * @return A JSON representation of a category.
+     */
+    public String toJSON() {
+        return String.format("{\"id\":%d,\"name\":\"%s\"}",
+                this.id, this.name);
     }
 }

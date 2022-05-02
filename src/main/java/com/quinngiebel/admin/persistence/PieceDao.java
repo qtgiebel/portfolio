@@ -2,6 +2,9 @@ package com.quinngiebel.admin.persistence;
 
 import com.quinngiebel.admin.entities.Piece;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * The type Piece dao.
  */
@@ -12,6 +15,14 @@ public class PieceDao extends GenericDao<Piece> {
      */
     public PieceDao() {
         this.setType(Piece.class);
+    }
+
+    /**
+     * Retrieves all the pieces that are not archived.
+     * @return A list of the unarchived pieces.
+     */
+    public List<Piece> getUnarchivedPieces() {
+        return getByColumn("archived", false);
     }
 
     /**
@@ -32,5 +43,14 @@ public class PieceDao extends GenericDao<Piece> {
         update(toPublish);
     }
 
+    /**
+     * Returns a JSON representation of the list of pieces.
+     * @param resultList The list of pieces.
+     * @return A JSON representation of the list
+     */
+    public String toJSON(List<Piece> resultList) {
+        return String.format("{\"images\":[%s]}",
+                resultList.stream().map(Piece::toJSON).collect(Collectors.joining(",")));
+    }
 
 }

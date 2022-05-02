@@ -30,14 +30,19 @@ public class Piece {
     @ManyToOne
     private Category category;
 
+    /**
+     * Instantiates a new Piece.
+     */
     public Piece() {
     }
 
+
     /**
+     * Instantiates a new Piece.
      *
-     * @param title
-     * @param location
-     * @param category
+     * @param title    the title
+     * @param location the location
+     * @param category the category
      */
     public Piece(String title, String location, Category category) {
         this.title = title;
@@ -45,12 +50,14 @@ public class Piece {
         this.category = category;
     }
 
+
     /**
+     * Instantiates a new Piece.
      *
-     * @param title
-     * @param location
-     * @param category
-     * @param isArchived
+     * @param title      the title
+     * @param location   the location
+     * @param category   the category
+     * @param isArchived if the piece is archived
      */
     public Piece(String title, String location, Category category, boolean isArchived) {
         this.title = title;
@@ -60,90 +67,117 @@ public class Piece {
     }
 
     /**
+     * To json string.
      *
-     * @return
+     * @return the string
+     */
+    public String toJSON() {
+        return String.format(
+                "{\"id\":%d,\"title\":\"%s\", \"location\":\"%s\", \"archived\":\"%b\", \"category\":%s}",
+                this.id, this.title, this.location, this.archived, this.category.toJSON());
+    }
+
+
+    /**
+     * Gets id.
+     *
+     * @return the id
      */
     public int getId() {
         return id;
     }
 
+
     /**
+     * Sets id.
      *
-     * @param artId
+     * @param artId the art id
      */
     public void setId(int artId) {
         this.id = artId;
     }
 
+
     /**
+     * Gets title.
      *
-     * @return
+     * @return the title
      */
     public String getTitle() {
         return title;
     }
 
+
     /**
+     * Sets title.
      *
-     * @param altText
+     * @param altText the alt text
      */
     public void setTitle(String altText) {
         this.title = altText;
     }
 
+
     /**
+     * Gets location.
      *
-     * @return
+     * @return the location
      */
     public String getLocation() {
         return location;
     }
 
+
     /**
+     * Sets location.
      *
-     * @param location
+     * @param location the location
      */
     public void setLocation(String location) {
         this.location = location;
     }
 
+
     /**
+     * Gets category.
      *
-     * @return
+     * @return the category
      */
     public Category getCategory() {
         return category;
     }
 
+
     /**
+     * Sets category.
      *
-     * @param category
+     * @param category the category
      */
     public void setCategory(Category category) {
         this.category = category;
     }
 
+
     /**
+     * Is archived boolean.
      *
-     * @return
+     * @return the boolean
      */
     public boolean isArchived() {
         return archived;
     }
 
+
     /**
+     * Sets archived.
      *
-     * @param archived
+     * @param archived the archived
      */
     public void setArchived(boolean archived) {
         this.archived = archived;
     }
 
-    /**
-     *
-     * @param o
-     * @return
-     */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -158,10 +192,7 @@ public class Piece {
         return location.equals(piece.location);
     }
 
-    /**
-     *
-     * @return
-     */
+
     @Override
     public String toString() {
         return "Piece{" +
