@@ -22,14 +22,8 @@ public class User {
     @Column(name = "view_permission", columnDefinition = "boolean default true")
     private boolean viewPermission;
 
-    @Column(name = "archive_permission", columnDefinition = "boolean default false")
-    private boolean archivePermission;
-
-    @Column(name = "remove_permission", columnDefinition = "boolean default false")
-    private boolean removePermission;
-
-    @Column(name = "publish_permission", columnDefinition = "boolean default false")
-    private boolean publishPermission;
+    @Column(name = "admin_permission", columnDefinition = "boolean default false")
+    private boolean adminPermission;
 
     /**
      * Default constructor for a User.
@@ -54,18 +48,13 @@ public class User {
      * @param id                The user id.
      * @param email             The user's email.
      * @param viewPermission    Permission to view the admin tool.
-     * @param archivePermission Permission to archive pieces.
-     * @param removePermission  Permission to delete pieces.
-     * @param publishPermission Permission to unarchive pieces.
+     * @param adminPermission   Permission to use the admin tool.
      */
-    public User(String id, String email, boolean viewPermission, boolean archivePermission,
-                boolean removePermission, boolean publishPermission) {
+    public User(String id, String email, boolean viewPermission, boolean adminPermission) {
         this.setId(id);
         this.setEmail(email);
         this.setViewPermission(viewPermission);
-        this.setArchivePermission(archivePermission);
-        this.setRemovePermission(removePermission);
-        this.setPublishPermission(publishPermission);
+        this.setAdminPermission(adminPermission);
     }
 
     /**
@@ -75,8 +64,8 @@ public class User {
      */
     public String toJSON() {
         return String.format(
-                "{\"id\":\"%s\",\"email\":\"%s\", \"viewPermission\":%b, \"archivePermission\":%b, \"removePermission\":%b, \"publishPermission\":%b}",
-                this.id, this.email, this.viewPermission, this.archivePermission, this.removePermission, this.publishPermission);
+                "{\"id\":\"%s\",\"email\":\"%s\", \"viewPermission\":%b, \"adminPermission\":%b}",
+                this.id, this.email, this.viewPermission, this.adminPermission);
     }
 
     /**
@@ -136,55 +125,19 @@ public class User {
     /**
      * Verifies if the user has archiving permissions.
      *
-     * @return If the user has permission to archive pieces.
+     * @return If the user has admin permissions.
      */
-    public boolean isArchivePermission() {
-        return archivePermission;
+    public boolean isAdminPermission() {
+        return adminPermission;
     }
 
     /**
      * Sets if the user has archiving permissions.
      *
-     * @param archivePermission the archive permission.
+     * @param adminPermission the archive permission.
      */
-    public void setArchivePermission(boolean archivePermission) {
-        this.archivePermission = archivePermission;
-    }
-
-    /**
-     * Verifies if the user has removing permissions.
-     *
-     * @return If the user has permission to remove pieces
-     */
-    public boolean isRemovePermission() {
-        return removePermission;
-    }
-
-    /**
-     * Sets if the user has removing permissions.
-     *
-     * @param removePermission the remove permission.
-     */
-    public void setRemovePermission(boolean removePermission) {
-        this.removePermission = removePermission;
-    }
-
-    /**
-     * Verifies if the user has publishing permissions.
-     *
-     * @return If the user has permission to publish pieces.
-     */
-    public boolean isPublishPermission() {
-        return publishPermission;
-    }
-
-    /**
-     * Sets if the user has publishing permissions.
-     *
-     * @param publishPermission the publish permission.
-     */
-    public void setPublishPermission(boolean publishPermission) {
-        this.publishPermission = publishPermission;
+    public void setAdminPermission(boolean adminPermission) {
+        this.adminPermission = adminPermission;
     }
 
     /**
@@ -202,9 +155,7 @@ public class User {
 
         if (!id.equals(user.id)) return false;
         if (viewPermission != user.viewPermission) return false;
-        if (archivePermission != user.archivePermission) return false;
-        if (removePermission != user.removePermission) return false;
-        if (publishPermission != user.publishPermission) return false;
+        if (adminPermission != user.adminPermission) return false;
         return email.equals(user.email);
     }
 
@@ -219,9 +170,7 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", viewPermission=" + viewPermission +
-                ", archivePermission=" + archivePermission +
-                ", removePermission=" + removePermission +
-                ", publishPermission=" + publishPermission +
+                ", adminPermission=" + adminPermission +
                 '}';
     }
 }

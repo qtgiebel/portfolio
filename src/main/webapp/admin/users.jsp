@@ -70,18 +70,18 @@
                 </div>
                 <div class="bg-secondary run-to-bottom px-4 py-5">
                     <div class="container bg-light rounded-corners">
-                        <div class="container">
-                            <p class="mt-6">
-                                qtgiebel@gmail.com
-                            </p>
-                            <fieldset class="col">
-                                <legend>Permissions</legend>
-                                <p>View: <input type="checkbox" name="view" id="view" checked="checked" disabled="disabled"></p>
-                                <p>Archive: <input type="checkbox" name="archive" id="archive"  disabled="disabled"></p>
-                                <p>Publish: <input type="checkbox" name="publish" id="publish" disabled="disabled"></p>
-                                <p>Delete: <input type="checkbox" name="delete" id="delete" disabled="disabled"></p>
-                            </fieldset>
-                        </div>
+                        <form>
+                            <div class="container">
+                                <p class="mt-6">
+                                    qtgiebel@gmail.com
+                                </p>
+                                <fieldset class="col">
+                                    <legend>Permissions</legend>
+                                    <label for="view">View:</label> <input type="checkbox" name="view" id="view" checked disabled>
+                                    <label for="admin">Admin:</label> <input type="checkbox" name="admin" id="admin"  disabled>
+                                </fieldset>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </main>
