@@ -10,22 +10,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserDaoTest {
 
-    UserDao userDao;
-    private final Logger logger = LogManager.getLogger(this.getClass());
-
-    /**
-     * Create the DAO.
-     */
-    @BeforeEach
-    void setUp() {
-        userDao = new UserDao();
-    }
-
-    /**
-     * Verifies dao type is set correctly.
-     */
-    @Test
-    void setTypeSuccess() {
-        assertEquals(User.class, userDao.getType());
-    }
+//    UserDao userDao;
+//    private final Logger logger = LogManager.getLogger(this.getClass());
+//
+//    /**
+//     * Create the DAO.
+//     */
+//    @BeforeEach
+//    void setUp() {
+//        userDao = new UserDao();
+//    }
+//
+//    /**
+//     * Verifies dao type is set correctly.
+//     */
+//    @Test
+//    void setTypeSuccess() {
+//        assertEquals(User.class, userDao.getType());
+//    }
 }

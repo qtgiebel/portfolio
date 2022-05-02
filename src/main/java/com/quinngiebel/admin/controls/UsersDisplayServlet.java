@@ -1,7 +1,9 @@
 package com.quinngiebel.admin.controls;
 
 import com.quinngiebel.admin.entities.Piece;
+import com.quinngiebel.admin.persistence.GenericDao;
 import com.quinngiebel.admin.persistence.PieceDao;
+import com.quinngiebel.admin.persistence.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,15 +19,21 @@ import java.util.List;
  *
  * @author Quinn Giebel
  */
-@WebServlet(name = "UsersDisplayServlet", value = "/users")
+@WebServlet(name = "UsersDisplayServlet", value = "/admin/users")
 public class UsersDisplayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String forwardUrl = "/users.jsp";
-        /*PieceDao pieceDao = new PieceDao();
-        List<Piece> pieces = pieceDao.getAll();
+        if (request.getSession().getAttribute("verifiedUser") == null)
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/logIn");
+            dispatcher.forward(request, response);
+            return;
+        }
 
-        request.setAttribute("pieces", pieces);*/
+        String forwardUrl = "/admin/users.jsp";
+        UserDao userDao = new UserDao();
+
+        request.setAttribute("users", userDao.toJSON(userDao.getAll()));
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardUrl);
         dispatcher.forward(request, response);

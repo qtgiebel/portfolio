@@ -5,21 +5,52 @@
       <c:choose>
         <c:when test="${param.active == 'admin'}">
           <li class="nav-item">
-            <a class="nav-link text-light h2" href="/admin">Art</a>
+            <a class="nav-link text-light h2" href="/portfolio/admin">Art</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light h4" href="/admin/users">Users</a>
+            <a class="nav-link text-light h4" href="/portfolio/admin/users">Users</a>
           </li>
         </c:when>
         <c:when test="${param.active == 'users'}">
           <li class="nav-item">
-            <a class="nav-link text-light h4" href="/admin">Art</a>
+            <a class="nav-link text-light h4" href="/portfolio/admin">Art</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light h2" href="/admin/users">Users</a>
+            <a class="nav-link text-light h2" href="/portfolio/admin/users">Users</a>
           </li>
         </c:when>
       </c:choose>
+      <span class="navbar-text text-light">
+<%--      TODO:01 update to pass user object --%>
+        <c:out value="${user[1]}" /> <a href="/portfolio/admin/signOut">Sign Out</a>
+      </span>
     </ul>
+
   </nav>
 </header>
+
+
+<%--<nav class="navbar navbar-expand bg-dark bg-gradient topbar">--%>
+<%--  <div class="contianer-fluid">--%>
+<%--    <ul class="navbar-nav me-auto mb-2 mb-lg-0">--%>
+<%--      <c:choose>--%>
+<%--        <c:when test="${param.active == 'admin'}">--%>
+<%--          <li class="nav-item">--%>
+<%--            <a class="nav-link text-light active" href="/portfolio/admin">Art</a>--%>
+<%--          </li>--%>
+<%--          <li class="nav-item">--%>
+<%--            <a class="nav-link text-light" href="/portfolio/admin/users">Users</a>--%>
+<%--          </li>--%>
+<%--        </c:when>--%>
+<%--        <c:when test="${param.active == 'users'}">--%>
+<%--          <li class="nav-item">--%>
+<%--            <a class="nav-link text-light" href="/portfolio/admin">Art</a>--%>
+<%--          </li>--%>
+<%--          <li class="nav-item">--%>
+<%--            <a class="nav-link text-light active" href="/portfolio/admin/users">Users</a>--%>
+<%--          </li>--%>
+<%--        </c:when>--%>
+<%--      </c:choose>--%>
+<%--    </ul>--%>
+<%--  </div>--%>
+<%--</nav>--%>

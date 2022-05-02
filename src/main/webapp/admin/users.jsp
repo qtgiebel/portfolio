@@ -1,16 +1,18 @@
-<!-- <%-- Created by IntelliJ IDEA. User: Quinn Date: 2/10/2022 --%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
+<%-- Created by IntelliJ IDEA. User: Quinn Date: 2/10/2022 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 
 
 <head>
-
+    <script type="text/javascript">
+        const userCollection = ${users}; <%--List of image objects as JSON TODO:01: make this into an api call--%>
+    </script>
     <c:import url="templates/default-head-tags.jsp">
-        <c:param name="title" value="Users Admin" />
+        <c:param name="title" value="Admin Users" />
+        <c:param name="page" value="users" />
     </c:import>
 
-    <script src="js/index.js"></script>
 </head>
 
 <c:import url="templates/header-template.jsp">
@@ -23,108 +25,64 @@
         <div class="row run-to-bottom">
             <header class="col-2 bg-dark bg-gradient " id="categories-admin-view">
                 <!--
-                        for each category // flex down?
-                            output a section:
-                                with header: category name
-                                with main: 
-                                for each piece in category 
-                                    pieces wrapped in PANEL buttons 
-                                    additional button to upload new piece
-                                end for
-                        end for
+                        get all users
+                        for each user 
+                            print as entry in sidebar
                     -->
                 <div class="container py-1">
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
                             <header class="row"><span class="px-4 py-2 text-light category-name"
-                                    data-category-index="0">Sketch</span>
+                                    data-category-index="0">Users</span>
                             </header>
-                            <main class="row row-cols-2">
+                            <main class="row row-cols-1">
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
-                                    </button>
+                                    qtgiebel@gmail.com
                                 </div>
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
-                                    </button>
+                                    giebelq@madisoncollege.edu
                                 </div>
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
-                                    </button>
+                                    example@domain.com
                                 </div>
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
-                                    </button>
+                                    things@stuff.net
                                 </div>
                             </main>
                         </div>
                     </section>
-                    <section class="container bg-secondary rounded-corners my-1 mt-2">
-                        <div class="col">
-                            <header class="row"><span class="px-4 py-2 text-light category-name"
-                                    data-category-index="1">Painting</span></header>
-                            <main class="row row-cols-2">
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="1" />
-                                    </button>
-                                </div>
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="1" />
-                                    </button>
-                                </div>
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="1" />
-                                    </button>
-                                </div>
-                            </main>
-                        </div>
-                    </section>
+                    
                 </div>
-                <!-- Create new category button -->
+                <!-- Create new user button -->
             </header>
-            <main class="col-10 max-height" id="piece-admin-view">
-                <!--
-                JS: PANEL onclick
-                    ouput section:
-                        with header: category name
-                        with main: large version of image from og button
-                end JS
-            -->
+            <main class="col-10 max-height" id="user-admin-view">
+                
                 <div class="navbar bg-light">
                     <div class="container">
                         <div class="float-start">
                             <p class="h2 nav-link text-dark float-start col">
-                                <span class="row small text-secondary" id="hero-category">
-                                    Category
-                                </span>
                                 <span class="row h2" id="hero-title">
-                                    Title
+                                    User Information
                                 </span>
                             </p>
-
-                        </div>
-                        <div class="float-end">
-                            <button class="btn btn-secondary">Archive</button>
-                            <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </div>
-                <div class="bg-secondary run-to-bottom px-4 py-5" id="hero-image">
-                    <!-- <img class="rounded mx-auto d-block" src="" alt="Necronomicon Doodle" /> -->
+                <div class="bg-secondary run-to-bottom px-4 py-5">
+                    <div class="container bg-light rounded-corners">
+                        <div class="container">
+                            <p class="mt-6">
+                                qtgiebel@gmail.com
+                            </p>
+                            <fieldset class="col">
+                                <legend>Permissions</legend>
+                                <p>View: <input type="checkbox" name="view" id="view" checked="checked" disabled="disabled"></p>
+                                <p>Archive: <input type="checkbox" name="archive" id="archive"  disabled="disabled"></p>
+                                <p>Publish: <input type="checkbox" name="publish" id="publish" disabled="disabled"></p>
+                                <p>Delete: <input type="checkbox" name="delete" id="delete" disabled="disabled"></p>
+                            </fieldset>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

@@ -12,16 +12,12 @@ import javax.persistence.*;
 @Entity(name = "User")
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native",strategy = "native")
+    @Id
     @Column
-    private int id;
+    private String id;
 
     @Column
     private String email;
-
-    @Column
-    private String password;
 
     @Column(name = "view_permission", columnDefinition = "boolean default true")
     private boolean viewPermission;
@@ -44,28 +40,28 @@ public class User {
     /**
      * Creates a user with default permissions.
      *
+     * @param id        The user's cognito id.
      * @param email     The user's email address.
-     * @param password  The user's password.
      */
-    public User(String email, String password) {
+    public User(String id, String email) {
+        this.setId(id);
         this.setEmail(email);
-        this.setPassword(password);
     }
 
     /**
      * Creates a user with non-standard permissions.
      *
-     * @param email             The user's email address.
-     * @param password          The user's password.
+     * @param id                The user id.
+     * @param email             The user's email.
      * @param viewPermission    Permission to view the admin tool.
      * @param archivePermission Permission to archive pieces.
      * @param removePermission  Permission to delete pieces.
      * @param publishPermission Permission to unarchive pieces.
      */
-    public User(String email, String password, boolean viewPermission, boolean archivePermission,
+    public User(String id, String email, boolean viewPermission, boolean archivePermission,
                 boolean removePermission, boolean publishPermission) {
+        this.setId(id);
         this.setEmail(email);
-        this.setPassword(password);
         this.setViewPermission(viewPermission);
         this.setArchivePermission(archivePermission);
         this.setRemovePermission(removePermission);
@@ -73,21 +69,32 @@ public class User {
     }
 
     /**
+     * To json string.
+     *
+     * @return the string
+     */
+    public String toJSON() {
+        return String.format(
+                "{\"id\":\"%s\",\"email\":\"%s\", \"viewPermission\":%b, \"archivePermission\":%b, \"removePermission\":%b, \"publishPermission\":%b}",
+                this.id, this.email, this.viewPermission, this.archivePermission, this.removePermission, this.publishPermission);
+    }
+
+    /**
      * Gets id.
      *
      * @return the id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * Sets id.
      *
-     * @param userId the user id
+     * @param id the user id
      */
-    public void setId(int userId) {
-        this.id = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -108,25 +115,7 @@ public class User {
         this.email = email;
     }
 
-    /**
-     * Gets password.
-     *
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets password.
-     *
-     * @param password the password
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
+        /**
      * Verifies if the user has viewing permissions.
      *
      * @return If the user has permission to view pieces
@@ -211,13 +200,12 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
+        if (!id.equals(user.id)) return false;
         if (viewPermission != user.viewPermission) return false;
         if (archivePermission != user.archivePermission) return false;
         if (removePermission != user.removePermission) return false;
         if (publishPermission != user.publishPermission) return false;
-        if (!email.equals(user.email)) return false;
-        return password.equals(user.password);
+        return email.equals(user.email);
     }
 
     /**
@@ -230,7 +218,6 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", viewPermission=" + viewPermission +
                 ", archivePermission=" + archivePermission +
                 ", removePermission=" + removePermission +
