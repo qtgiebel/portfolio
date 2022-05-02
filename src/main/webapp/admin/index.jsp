@@ -1,15 +1,17 @@
-<!-- <%-- Created by IntelliJ IDEA. User: Quinn Date: 2/10/2022 --%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
+ <%-- Created by IntelliJ IDEA. User: Quinn Date: 2/10/2022 --%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 
 
 <head>
+    <script type="text/javascript">
+        const imageCollection = ${images}; <%--List of image objects as JSON TODO:01: make this into an api call --%>
+    </script>
     <c:import url="templates/default-head-tags.jsp">
         <c:param name="title" value="Art Admin" />
+        <c:param name="page" value="admin" />
     </c:import>
-
-    <script src="js/index.js"></script>
 </head>
 
 <c:import url="templates/header-template.jsp">
@@ -32,22 +34,26 @@
                                 end for
                         end for
                     -->
-                <c:forEach items="category" var="${categories}">
-                <div class="container py-1">
-                    <section class="container bg-secondary rounded-corners my-1 mt-2">
-                        <div class="col">
-                            <header class="row"><span class="px-4 py-2 text-light category-name"
-                                                      data-category-index="0">${category.name}</span>
-                            </header>
-                            <main class="row row-cols-2">
-                    <c:forEach items="piece" var="${category.pieces}">
+                <%-- TODO:02 dynamic category printing uncomment eventually
+                <c:forEach var="category" items="${categories}">
+                    <div class="container py-1">
+                        <section class="container bg-secondary rounded-corners my-1 mt-2">
+                            <div class="col">
+                                <header class="row"><span class="px-4 py-2 text-light category-name"
+                                                          data-category-index="0">${category.name}</span>
+                                </header>
+                                <main class="row row-cols-2">
+                        TODO:003 dynamic image printing
+                        <c:forEach items="${category.pieces}" var="piece">
 
-                    </c:forEach>
-                            </main>
-                        </div>
-                    </section>
-                </div>
+                        </c:forEach>
+                                </main>
+                            </div>
+                        </section>
+                    </div>
                 </c:forEach>
+                --%>
+
                 <div class="container py-1">
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
@@ -145,5 +151,6 @@
         </div>
     </section>
 </body>
+
 
 </html>
