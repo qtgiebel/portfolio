@@ -7,6 +7,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quinngiebel.admin.auth.*;
+import com.quinngiebel.admin.entities.User;
+import com.quinngiebel.admin.persistence.UserDao;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -102,7 +104,7 @@ public class Auth extends HttpServlet  {
             TokenResponse tokenResponse = getToken(authRequest);
 
             // TODO update to pass user object as cookie when user dao is further along
-            String[] verifiedUser = validate(tokenResponse);
+            User verifiedUser = validate(tokenResponse);
             request.getSession().setAttribute("verifiedUser", verifiedUser);
         } catch (IOException e) {
             logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -161,7 +163,7 @@ public class Auth extends HttpServlet  {
      * @return
      * @throws IOException
      */
-    private String[] validate(TokenResponse tokenResponse) throws Exception {
+    private User validate(TokenResponse tokenResponse) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -196,7 +198,7 @@ public class Auth extends HttpServlet  {
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer(iss)
                 .withClaim("token_use", "id") // make sure you're verifying id token
-                .acceptLeeway(15)
+                .acceptLeeway(1000)
                 .build();
 
 
@@ -204,9 +206,8 @@ public class Auth extends HttpServlet  {
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
 
         //TODO fix this
-        String[] user = new String[2];
-        user[0] = jwt.getClaim("cognito:username").asString();
-        user[1] = jwt.getClaim("email").asString();
+        User user = new UserDao().getByColumn("id", jwt.getClaim("cognito:username").asString()).get(0);
+
         logger.debug("here's the user: " + user);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());

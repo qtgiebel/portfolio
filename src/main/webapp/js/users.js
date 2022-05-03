@@ -27,9 +27,9 @@ const listUsers = () => {
 
 const focusUser = event => {
     const currentUser = userCollection.users.filter(user => user.email === event.target.innerText)[0];
-    const heroUser = document.querySelector(`#hero-user`)
-    const view = document.querySelector(`#view`)
-    const admin = document.querySelector(`#admin`)
+    const heroUser = document.querySelector(`#hero-user`);
+    const view = document.querySelector(`#view`);
+    const admin = document.querySelector(`#admin`);
 
     heroUser.innerHTML = currentUser.email;
     heroUser.dataset.userId = currentUser.id;

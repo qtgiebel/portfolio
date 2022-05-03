@@ -82,16 +82,32 @@
                         <form action="/portfolio/admin/update-user">
                             <div class="container">
                                 <div class="mb-3">
-                                    <p id="hero-user" class="form-label pt-6">qtgiebel@gmail.com</p>
+                                    <p id="hero-user" class="form-label pt-6" data-userId="<c:out value="${verifiedUser.id}"/>"><c:out value="${verifiedUser.email}"/></p>
                                 </div>
                                 <fieldset class="col pb-3">
                                     <legend>Permissions</legend>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="permission" id="view" value="view" checked>
+                                        <input class="form-check-input" type="checkbox" name="permission" id="view" value="view"
+                                            <c:if test="${verifiedUser.viewPermission}">
+                                                checked
+                                            </c:if>
+                                            <c:if test="${not verifiedUser.adminPermission}">
+                                                disabled
+                                            </c:if>
+                                        >
                                         <label class="form-check-label" for="view">View</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="permission" id="admin" value="admin">
+                                        <input class="form-check-input" type="checkbox" name="permission" id="admin" value="admin"
+                                            <c:choose>
+                                                <c:when test="${verifiedUser.adminPermission}">
+                                                    checked
+                                                </c:when>
+                                                <c:otherwise>
+                                                    disabled
+                                                </c:otherwise>
+                                            </c:choose>
+                                        >
                                         <label class="form-check-label" for="admin">Admin</label>
                                     </div>
                                 </fieldset>

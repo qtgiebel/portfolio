@@ -22,7 +22,7 @@
       </c:choose>
       <span class="navbar-text text-light">
 <%--      TODO:01 update to pass user object --%>
-        <c:out value="${user[1]}" /> <a href="/portfolio/admin/signOut">Sign Out</a>
+        <c:out value="${user.email}" /> <a href="/portfolio/admin/signOut">Sign Out</a>
       </span>
     </ul>
 
