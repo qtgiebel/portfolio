@@ -35,23 +35,32 @@
                             <header class="row"><span class="px-4 py-2 text-light category-name"
                                     data-category-index="0">Users</span>
                             </header>
-                            <main class="row row-cols-1">
-                                <div class="col py-2">
-                                    qtgiebel@gmail.com
-                                </div>
-                                <div class="col py-2">
-                                    giebelq@madisoncollege.edu
-                                </div>
-                                <div class="col py-2">
-                                    example@domain.com
-                                </div>
-                                <div class="col py-2">
-                                    things@stuff.net
-                                </div>
+<%--                            TODO:04 loop through each user and print email as button to send to main panel--%>
+                            <main id="user-list" class="bg-light container">
+
                             </main>
                         </div>
                     </section>
                     
+                    <button class="btn btn-dark" id="new-user-dialog-btn">New User</button>
+                    <div id="new-user-dialog" class="dialog">
+                        <div class="container rounded-corners dialog-content">
+                            <span id="close-btn">&times;</span>
+                            <form action="/admin/add-user">
+                                <div class="my-3">
+                                    <label class="form-label" for="email">Email:</label>
+                                    <input class="form-control" type="text" name="email" id="email">
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="admin" id="dialog-admin">
+                                        <label class="form-check-label" for="dialog-admin">Admin?</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-dark" type="submit">Create User</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <!-- Create new user button -->
             </header>
@@ -70,16 +79,23 @@
                 </div>
                 <div class="bg-secondary run-to-bottom px-4 py-5">
                     <div class="container bg-light rounded-corners">
-                        <form>
+                        <form action="/portfolio/admin/update-user">
                             <div class="container">
-                                <p class="mt-6">
-                                    qtgiebel@gmail.com
-                                </p>
-                                <fieldset class="col">
+                                <div class="mb-3">
+                                    <p id="hero-user" class="form-label pt-6">qtgiebel@gmail.com</p>
+                                </div>
+                                <fieldset class="col pb-3">
                                     <legend>Permissions</legend>
-                                    <label for="view">View:</label> <input type="checkbox" name="view" id="view" checked disabled>
-                                    <label for="admin">Admin:</label> <input type="checkbox" name="admin" id="admin"  disabled>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="permission" id="view" value="view" checked>
+                                        <label class="form-check-label" for="view">View</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="permission" id="admin" value="admin">
+                                        <label class="form-check-label" for="admin">Admin</label>
+                                    </div>
                                 </fieldset>
+                                <input type="submit" value="Save Changes" class="btn btn-danger mb-3">
                             </div>
                         </form>
                     </div>

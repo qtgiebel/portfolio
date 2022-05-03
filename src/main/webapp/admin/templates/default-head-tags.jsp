@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="/portfolio/css/admin/main.css">
 <c:choose>
     <c:when test="${param.page == 'admin'}">
-        <link rel="stylesheet" href="/portfolio/js/admin.js">
+        <script src="/portfolio/js/admin.js"></script>
     </c:when>
     <c:when test="${param.page == 'users'}">
+        <link rel="stylesheet" href="/portfolio/css/admin/users.css">
+        <script src="/portfolio/js/users.js"></script>
     </c:when>
 </c:choose>
