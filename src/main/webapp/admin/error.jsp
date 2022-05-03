@@ -14,5 +14,8 @@
 <body>
     <c:out value="${errorMsg}" />
     <c:out value="${stackTrace}" />
+    <hr>
+    <c:out value="${view}" />
+    <c:out value="${admin}" />
 </body>
 </html>
