@@ -1,5 +1,6 @@
 package com.quinngiebel.utilities;
 
+import com.quinngiebel.admin.persistence.PieceDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +17,6 @@ import java.util.Properties;
  */
 @WebServlet(name = "applicationStartup", urlPatterns = { "/application-startup" }, loadOnStartup = 1)
 public class ApplicationStartup extends HttpServlet implements PropertiesLoader {
-    private Properties properties;
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -32,7 +32,7 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoader 
 
         try {
             ServletContext context = getServletContext();
-            properties = loadProperties("/cognito.properties");
+            Properties properties = loadProperties("/cognito.properties");
 
             context.setAttribute("CLIENT_ID", properties.getProperty("client.id"));
             context.setAttribute("CLIENT_SECRET", properties.getProperty("client.secret"));
@@ -43,6 +43,9 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoader 
             context.setAttribute("REVOKE_ACCESS_URL", properties.getProperty("revokeAccessURL"));
             context.setAttribute("REGION", properties.getProperty("region"));
             context.setAttribute("POOL_ID", properties.getProperty("poolId"));
+
+            PieceDao hibernateSpool = new PieceDao();
+            hibernateSpool.getById(1);
 
         } catch (ServletException e) {
             logger.error("Servlet Exception", e);
