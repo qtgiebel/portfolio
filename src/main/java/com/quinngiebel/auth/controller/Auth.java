@@ -194,16 +194,30 @@ public class Auth extends HttpServlet  {
                 .acceptLeeway(1000)
                 .build();
 
-
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
-
-        //TODO fix this
-        User user = new UserDao().getByColumn("id", jwt.getClaim("cognito:username").asString()).get(0);
+        User user = checkIfNewUser(jwt);
 
         logger.debug("here's the user: " + user);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
+
+        return user;
+    }
+
+    /**
+     * Checks if the user exists in the user db and creates a new record if not.
+     * @param jwt The authentication data returned from cognito.
+     * @return The user record that has been authenticated.
+     */
+    private User checkIfNewUser(DecodedJWT jwt) {
+        UserDao userAuth = new UserDao();
+        User user = userAuth.getByColumn("id", jwt.getClaim("cognito:username").asString()).get(0);
+
+        if (user == null) {
+            userAuth.insert(new User(jwt.getClaim("cognito:username").asString(), jwt.getClaim("email").asString()));
+            user = userAuth.getByColumn("id", jwt.getClaim("cognito:username").asString()).get(0);
+        }
 
         return user;
     }
