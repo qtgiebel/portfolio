@@ -1,4 +1,4 @@
-package com.quinngiebel.admin.auth.controller;
+package com.quinngiebel.auth.controller;
 
 
 import com.auth0.jwt.JWT;
@@ -6,9 +6,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quinngiebel.admin.auth.*;
 import com.quinngiebel.admin.entities.User;
 import com.quinngiebel.admin.persistence.UserDao;
+import com.quinngiebel.auth.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,20 +38,14 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
 
-@WebServlet(
-        urlPatterns = {"/admin/auth"}
-)
-// TODO if something goes wrong it this process, route to an error page. Currently, errors are only caught and logged.
 /**
  * Inspired by: https://stackoverflow.com/questions/52144721/how-to-get-access-token-using-client-credentials-using-java-code
  */
-
+@WebServlet(urlPatterns = {"/auth"})
 public class Auth extends HttpServlet  {
-    Properties properties;
     String CLIENT_ID;
     String CLIENT_SECRET;
     String OAUTH_URL;
@@ -142,7 +135,7 @@ public class Auth extends HttpServlet  {
      */
     private TokenResponse getToken(HttpRequest authRequest) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        HttpResponse<?> response = null;
+        HttpResponse<?> response;
 
         response = client.send(authRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -178,7 +171,7 @@ public class Auth extends HttpServlet  {
 
         // TODO the following is "happy path", what if the exceptions are caught?
         // Create a public key
-        PublicKey publicKey = null;
+        PublicKey publicKey;
         try {
             publicKey = KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(modulus, exponent));
         } catch (InvalidKeySpecException e) {
@@ -236,10 +229,9 @@ public class Auth extends HttpServlet  {
 
         String encoding = Base64.getEncoder().encodeToString(keys.getBytes());
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(OAUTH_URL))
+        return HttpRequest.newBuilder().uri(URI.create(OAUTH_URL))
                 .headers("Content-Type", "application/x-www-form-urlencoded", "Authorization", "Basic " + encoding)
                 .POST(HttpRequest.BodyPublishers.ofString(form)).build();
-        return request;
     }
 
     /**

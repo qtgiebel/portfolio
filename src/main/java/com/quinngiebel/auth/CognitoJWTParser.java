@@ -1,4 +1,4 @@
-package com.quinngiebel.admin.auth;
+package com.quinngiebel.auth;
 /*
 // Copyright 2013-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
@@ -8,6 +8,7 @@ package com.quinngiebel.admin.auth;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidParameterException;
 import java.util.Base64;
 import java.util.Base64.Decoder;
@@ -32,10 +33,8 @@ public class CognitoJWTParser {
             validateJWT(jwt);
             Decoder dec= Base64.getDecoder();
             final byte[] sectionDecoded = dec.decode(jwt.split("\\.")[HEADER]);
-            final String jwtSection = new String(sectionDecoded, "UTF-8");
+            final String jwtSection = new String(sectionDecoded, StandardCharsets.UTF_8);
             return new JSONObject(jwtSection);
-        } catch (final UnsupportedEncodingException e) {
-            throw new InvalidParameterException(e.getMessage());
         } catch (final Exception e) {
             throw new InvalidParameterException("error in parsing JSON");
         }
@@ -53,10 +52,8 @@ public class CognitoJWTParser {
             Decoder dec= Base64.getDecoder();
             final String payload = jwt.split("\\.")[PAYLOAD];
             final byte[] sectionDecoded = dec.decode(payload);
-            final String jwtSection = new String(sectionDecoded, "UTF-8");
+            final String jwtSection = new String(sectionDecoded, StandardCharsets.UTF_8);
             return new JSONObject(jwtSection);
-        } catch (final UnsupportedEncodingException e) {
-            throw new InvalidParameterException(e.getMessage());
         } catch (final Exception e) {
             throw new InvalidParameterException("error in parsing JSON");
         }
@@ -73,7 +70,7 @@ public class CognitoJWTParser {
             validateJWT(jwt);
             Decoder dec= Base64.getDecoder();
             final byte[] sectionDecoded = dec.decode(jwt.split("\\.")[SIGNATURE]);
-            return new String(sectionDecoded, "UTF-8");
+            return new String(sectionDecoded, StandardCharsets.UTF_8);
         } catch (final Exception e) {
             throw new InvalidParameterException("error in parsing JSON");
         }

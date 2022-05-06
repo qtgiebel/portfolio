@@ -1,4 +1,4 @@
-package com.quinngiebel.admin.auth.controller;
+package com.quinngiebel.auth.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/admin/signOut"})
+@WebServlet(urlPatterns = {"/signOut"})
 /*
  * Begins the authentication process using AWS Cognito
  */
@@ -36,7 +36,7 @@ public class SignOut extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.getSession().removeAttribute("verifiedUser");
+        request.getSession().invalidate();
         logger.info("user logged out");
 
         String url = LOGOUT_URL + "?client_id=" + CLIENT_ID + "&logout_uri=" + REVOKE_ACCESS_URL;

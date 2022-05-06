@@ -1,4 +1,4 @@
-package com.quinngiebel.admin.auth;
+package com.quinngiebel.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

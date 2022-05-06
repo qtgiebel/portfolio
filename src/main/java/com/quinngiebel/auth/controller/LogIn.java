@@ -1,4 +1,4 @@
-package com.quinngiebel.admin.auth.controller;
+package com.quinngiebel.auth.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,16 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/admin/logIn"})
-/*
+/**
  * Begins the authentication process using AWS Cognito
  */
+@WebServlet(urlPatterns = {"/logIn"})
 public class LogIn extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
     public static String CLIENT_ID;
     public static String LOGIN_URL;
     public static String REDIRECT_URL;
 
+    /**
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
@@ -38,7 +42,6 @@ public class LogIn extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // TODO if properties weren't loaded properly, route to an error page
         String url = LOGIN_URL + "?response_type=code&client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URL;
         resp.sendRedirect(url);
     }

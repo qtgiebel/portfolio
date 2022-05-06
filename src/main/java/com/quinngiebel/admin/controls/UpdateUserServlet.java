@@ -29,18 +29,24 @@ public class UpdateUserServlet extends HttpServlet {
         User toUpdate = userDao.getByColumn("id", request.getParameter("userId")).get(0);
 
         String[] permissions = request.getParameterValues("permission");
+        switch (permissions.length) {
+            case 0:
+                toUpdate.setViewPermission(false);
+                toUpdate.setAdminPermission(false);
+                break;
+            case 1:
+                toUpdate.setViewPermission(true);
+                toUpdate.setAdminPermission(false);
+                break;
+            case 2:
+                toUpdate.setViewPermission(true);
+                toUpdate.setAdminPermission(true);
+                break;
+        }
 
-        logger.info("values: " + request.getParameter("userId"));
+        userDao.update(toUpdate);
 
-        logger.info("values: " + request.getParameter("admin"));
-        toUpdate.setViewPermission(Boolean.parseBoolean(request.getParameter("view")));
-        logger.info("toUpdate: " + toUpdate.toJSON());
-//        userDao.update(toUpdate);
-        request.setAttribute("view", request.getParameter("view"));
-        request.setAttribute("admin", request.getParameter("admin"));
-        String forwardUrl = "/admin/error.jsp";
-
-
+        String forwardUrl = "/admin/users";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardUrl);
         dispatcher.forward(request, response);
     }
