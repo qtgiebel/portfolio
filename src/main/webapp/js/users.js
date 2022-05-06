@@ -28,11 +28,12 @@ const listUsers = () => {
 const focusUser = event => {
     const currentUser = userCollection.users.filter(user => user.email === event.target.innerText)[0];
     const heroUser = document.querySelector(`#hero-user`);
+    const userId = document.querySelector(`#user-id`);
     const view = document.querySelector(`#view`);
     const admin = document.querySelector(`#admin`);
 
     heroUser.innerHTML = currentUser.email;
-    heroUser.dataset.userId = currentUser.id;
+    userId.value = currentUser.id;
     currentUser.viewPermission ? view.checked = true : view.checked = false;
     currentUser.adminPermission ? admin.checked = true : admin.checked = false;
 }
@@ -54,8 +55,6 @@ const outClick = event => {
 const init = () => {
     const ckBoxes = document.getElementsByName(`permission`);
     ckBoxes.forEach(node => node.addEventListener(`change`, changeValue));
-
-    //TODO:01 use current user to set initial hero value
 
     listUsers();
 
