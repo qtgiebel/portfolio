@@ -21,8 +21,7 @@
         </c:when>
       </c:choose>
       <span class="navbar-text text-light">
-<%--      TODO:01 update to pass user object --%>
-        <c:out value="${user.email}" /> <a href="/portfolio/admin/signOut">Sign Out</a>
+        <c:out value="${verifiedUser.email}" /> <a href="/portfolio/signOut">Sign Out</a>
       </span>
     </ul>
 
