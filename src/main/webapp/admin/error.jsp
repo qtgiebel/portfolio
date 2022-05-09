@@ -12,10 +12,9 @@
     <title>Error</title>
 </head>
 <body>
-    <c:out value="${errorMsg}" />
-    <c:out value="${stackTrace}" />
+    <h1>We're sorry</h1>
+    <p>Something's gone wrong.</p>
     <hr>
-    <c:out value="${view}" />
-    <c:out value="${admin}" />
+    <p><c:out value="${errorMsg}" /></p>
 </body>
 </html>
