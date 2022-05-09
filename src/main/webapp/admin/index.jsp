@@ -23,95 +23,84 @@
         <!-- flex right? -->
         <div class="row run-to-bottom">
             <header class="col-2 bg-dark bg-gradient " id="categories-admin-view">
-                <!--
-                        for each category // flex down?
+                <%--
+                        for each category
                             output a section:
                                 with header: category name
-                                with main: 
-                                for each piece in category 
-                                    pieces wrapped in PANEL buttons 
-                                    additional button to upload new piece
+                                with main:
+                                for each piece in category
+                                    pieces wrapped in buttons
                                 end for
+                            additional button to upload new piece
                         end for
-                    -->
-                <%-- TODO:02 dynamic category printing uncomment eventually
+                    --%>
                 <c:forEach var="category" items="${categories}">
-                    <div class="container py-1">
-                        <section class="container bg-secondary rounded-corners my-1 mt-2">
-                            <div class="col">
-                                <header class="row"><span class="px-4 py-2 text-light category-name"
-                                                          data-category-index="0">${category.name}</span>
-                                </header>
-                                <main class="row row-cols-2">
-                        TODO:003 dynamic image printing
-                        <c:forEach items="${category.pieces}" var="piece">
-
-                        </c:forEach>
-                                </main>
-                            </div>
-                        </section>
-                    </div>
-                </c:forEach>
-                --%>
-
                 <div class="container py-1">
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
-                            <header class="row"><span class="px-4 py-2 text-light category-name"
-                                    data-category-index="0">Sketch</span>
+                            <header class="row">
+                                <span class="px-4 py-2 text-light category-name"
+                                data-cat-index="${category.id}">${category.name}</span>
                             </header>
                             <main class="row row-cols-2">
+                                <c:forEach var="piece" items="${category.pieces}">
                                 <div class="col py-2">
                                     <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
+                                        <img src="${piece.location}" alt="${piece.title}"/>
                                     </button>
                                 </div>
+                                </c:forEach>
+
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
+                                    <button class="img-thumbnail new-dialog-btn"
+                                            data-catIndex="${category.id}"
+                                            data-dialogId="new-image-${category.id}-dialog">
+
+                                        <img src="/portfolio/images/add-button.jpg" alt="Add new image"/>
                                     </button>
+
+                                    <div id="new-image-${category.id}-dialog" class="dialog">
+                                        <div class="container rounded-corners dialog-content">
+                                            <span class="close-btn" data-dialogId="new-image-${category.id}-dialog">&times;</span>
+                                            <form action="/portfolio/admin/addPiece" method="post" enctype="multipart/form-data">
+                                                <div class="my-3">
+                                                    <label class="form-label" for="title">Title:</label>
+                                                    <input class="form-control" type="text" name="title" id="title" required>
+                                                </div>
+                                                <div class="my-3">
+                                                    <input class="form-control" type="file" name="file" id="file" required/>
+                                                </div>
+                                                <input type="hidden" name="category" value="${category.id}"/>
+                                                <button class="btn btn-dark" type="submit">Add Piece</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
-                                    </button>
-                                </div>
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="0" />
-                                    </button>
-                                </div>
+
                             </main>
                         </div>
                     </section>
+                </div>
+                </c:forEach>
+                <div class="container py-1">
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
-                            <header class="row"><span class="px-4 py-2 text-light category-name"
-                                    data-category-index="1">Painting</span></header>
-                            <main class="row row-cols-2">
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="1" />
-                                    </button>
+                            <header class="row">
+                                <button class="btn btn-dark new-dialog-btn">New Category</button>
+                                <div id="new-category-dialog" class="dialog">
+                                    <div class="container rounded-corners dialog-content">
+                                        <span class="close-btn">&times;</span>
+                                        <form action="/admin/addCategory">
+                                            <div class="my-3">
+                                                <label class="form-label" for="category">Category:</label>
+                                                <input class="form-control" type="text" name="category" id="category">
+                                            </div>
+
+                                            <button class="btn btn-dark" type="submit">Create Category</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="1" />
-                                    </button>
-                                </div>
-                                <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="https://cdn.discordapp.com/attachments/941527220722225212/941531336747929621/necronomicon-doodle.jpg"
-                                            alt="Necronomicon Doodle" data-image-category-index="1" />
-                                    </button>
-                                </div>
-                            </main>
+                            </header>
                         </div>
                     </section>
                 </div>

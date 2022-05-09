@@ -27,7 +27,7 @@
 const focus = (event) => {
     let img = event.target;
     let title = img.alt;
-    let categoryIndex = img.dataset.imageCategoryIndex;
+    let categoryIndex = img.dataset.catIndex;
 
     removeCurrentFocus();
     setCategory(categoryIndex);
@@ -83,6 +83,8 @@ const init = () => {
     display.forEach(button => {
         button.addEventListener(`click`, focus);
     });
+
+    dialogInit();
 }
 
 window.onload = init;

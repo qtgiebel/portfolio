@@ -38,19 +38,7 @@ const focusUser = event => {
     currentUser.adminPermission ? admin.checked = true : admin.checked = false;
 }
 
-const displayDialog = () => {
-    document.querySelector(`#new-user-dialog`).style.display = `block`;
-}
 
-const closeDialog = () => {
-    document.querySelector(`#new-user-dialog`).style.display = `none`;
-}
-
-const outClick = event => {
-    if (event.target === document.querySelector(`#new-user-dialog`)) {
-        document.querySelector(`#new-user-dialog`).style.display = `none`;
-    }
-}
 
 const init = () => {
     const ckBoxes = document.getElementsByName(`permission`);
@@ -58,9 +46,7 @@ const init = () => {
 
     listUsers();
 
-    document.querySelector(`#new-user-dialog-btn`).addEventListener(`click`, displayDialog);
-    document.querySelector(`#close-btn`).addEventListener(`click`, closeDialog);
-    window.addEventListener(`click`, outClick);
+    dialogInit();
 }
 
 window.onload = init;
