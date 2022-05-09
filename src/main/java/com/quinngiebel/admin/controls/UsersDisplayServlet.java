@@ -23,13 +23,6 @@ import java.util.List;
 public class UsersDisplayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("verifiedUser") == null)
-        {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/logIn");
-            dispatcher.forward(request, response);
-            return;
-        }
-
         String forwardUrl = "/admin/users.jsp";
         UserDao userDao = new UserDao();
 
