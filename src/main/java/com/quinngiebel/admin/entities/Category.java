@@ -19,7 +19,16 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Piece> pieces = new HashSet<>();
+    private Set<Piece> pieces;
+
+    public Category() {
+        pieces = new HashSet<>();
+    }
+
+    public Category(String name) {
+        this.name = name;
+        pieces = new HashSet<>();
+    }
 
     public int getId() {
         return this.id;
