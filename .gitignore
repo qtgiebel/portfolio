@@ -4,6 +4,10 @@
 # User-specific stuff:
 /docs/screenshots/help
 
+## Properties files
+src/main/resources/*.properties
+src/main/resources/*.cfg.xml
+
 ## File-based project format:
 *.iws
 *.iml
