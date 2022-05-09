@@ -18,14 +18,6 @@ public class PieceDao extends GenericDao<Piece> {
     }
 
     /**
-     * Retrieves all the pieces that are not archived.
-     * @return A list of the unarchived pieces.
-     */
-    public List<Piece> getUnarchivedPieces() {
-        return getByColumn("archived", false);
-    }
-
-    /**
      * Archives a piece.
      * @param toArchive The piece being archived
      */
