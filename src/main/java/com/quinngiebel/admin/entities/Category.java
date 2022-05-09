@@ -49,7 +49,23 @@ public class Category {
      * @return The name of the category in title case.
      */
     public String getTitle() {
-        return this.name.substring(0, 1).toUpperCase(Locale.ROOT) + this.name.substring(1).toLowerCase(Locale.ROOT);
+        String[] nameArray = this.name.split(" ");
+        StringBuilder retString = new StringBuilder();
+
+        // if name is only one word
+        if (nameArray.length == 1) {
+            return retString.append(this.name.substring(0, 1).toUpperCase(Locale.ROOT))
+                    .append(this.name.substring(1).toLowerCase(Locale.ROOT))
+                    .toString();
+        }
+
+        // if name is multiple words
+        for (String word : nameArray) {
+            retString.append(word.substring(0, 1).toUpperCase(Locale.ROOT))
+                    .append(word.substring(1).toLowerCase(Locale.ROOT))
+                    .append(" ");
+        }
+        return retString.substring(0,retString.length()-1);//removes trailing space
     }
 
     /**
