@@ -83,7 +83,7 @@ public class Auth extends HttpServlet  {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authCode = request.getParameter("code");
-        String ERROR_PAGE = "error.jsp";
+        String ERROR_PAGE = "/portfolio/admin/error.jsp";
 
         if (authCode == null) {
             request.setAttribute("errorMsg", "Could not authorize.");
@@ -153,7 +153,7 @@ public class Auth extends HttpServlet  {
      * Get values out of the header to verify the token is legit. If it is legit, get the claims from it, such
      * as username.
      * @param tokenResponse
-     * @return
+     * @return An object representation of the authorized user.
      * @throws IOException
      */
     private User validate(TokenResponse tokenResponse) throws Exception {
@@ -164,12 +164,10 @@ public class Auth extends HttpServlet  {
         String keyId = tokenHeader.getKid();
         String alg = tokenHeader.getAlg();
 
-        // todo pick proper key from the two - it just so happens that the first one works for my case
         // Use Key's N and E
         BigInteger modulus = new BigInteger(1, org.apache.commons.codec.binary.Base64.decodeBase64(jwks.getKeys().get(0).getN()));
         BigInteger exponent = new BigInteger(1, org.apache.commons.codec.binary.Base64.decodeBase64(jwks.getKeys().get(0).getE()));
 
-        // TODO the following is "happy path", what if the exceptions are caught?
         // Create a public key
         PublicKey publicKey;
         try {
@@ -199,7 +197,6 @@ public class Auth extends HttpServlet  {
         User user = checkIfNewUser(jwt);
 
         logger.debug("here's the user: " + user);
-
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
         return user;
