@@ -15,7 +15,7 @@ import java.util.Properties;
  * 
  * @author Quinn Giebel
  */
-@WebServlet(name = "applicationStartup", urlPatterns = { "/application-startup" }, loadOnStartup = 1)
+@WebServlet(name = "ApplicationStartup", urlPatterns = { "/application-startup" }, loadOnStartup = 1)
 public class ApplicationStartup extends HttpServlet implements PropertiesLoader {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -43,6 +43,11 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoader 
             context.setAttribute("REVOKE_ACCESS_URL", properties.getProperty("revokeAccessURL"));
             context.setAttribute("REGION", properties.getProperty("region"));
             context.setAttribute("POOL_ID", properties.getProperty("poolId"));
+
+            properties = loadProperties("/api.properties");
+
+            context.setAttribute("S3_API_URL", properties.getProperty("api.url"));
+            context.setAttribute("CDN_DOMAIN", properties.getProperty("cdn.url"));
 
             PieceDao hibernateSpool = new PieceDao();
             hibernateSpool.getById(1);
