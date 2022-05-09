@@ -4,8 +4,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
+/**
+ * The entity Category.
+ */
 @Entity(name = "Category")
 @Table(name = "categories")
 public class Category {
@@ -21,41 +25,90 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Piece> pieces;
 
+    /**
+     * Instantiates a new Category.
+     */
     public Category() {
         pieces = new HashSet<>();
     }
 
+
+    /**
+     * Instantiates a new Category.
+     *
+     * @param name the name
+     */
     public Category(String name) {
         this.name = name;
         pieces = new HashSet<>();
     }
 
+    /**
+     * Returns the name of the category in title case.
+     *
+     * @return The name of the category in title case.
+     */
+    public String getTitle() {
+        return this.name.substring(0, 1).toUpperCase(Locale.ROOT) + this.name.substring(1).toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets pieces.
+     *
+     * @return the pieces
+     */
     public Set<Piece> getPieces() {
         return pieces;
     }
 
+    /**
+     * Sets pieces.
+     *
+     * @param pieces the pieces
+     */
     public void setPieces(Set<Piece> pieces) {
         this.pieces = pieces;
     }
 
     /**
      * Determines if another Object is equal to this instance of Category.
+     *
      * @param o The Object being verified.
      * @return True if the instances are equivalent and false if they are not.
      */
@@ -72,6 +125,7 @@ public class Category {
 
     /**
      * Returns a String representation of a category.
+     *
      * @return A String representation of a category.
      */
     @Override
@@ -84,6 +138,7 @@ public class Category {
 
     /**
      * Returns a JSON representation of a category.
+     *
      * @return A JSON representation of a category.
      */
     public String toJSON() {
