@@ -8,8 +8,8 @@ const closeDialog = event => {
 }
 
 const outClick = event => {
-    if (event.target === document.querySelector(`#new-user-dialog`)) {
-        document.querySelector(`#new-user-dialog`).style.display = `none`;
+    if (event.target === document.querySelector(`#${event.currentTarget.dataset.dialogid}`)) {
+        document.querySelector(`#${event.currentTarget.dataset.dialogid}`).style.display = `none`;
     }
 }
 

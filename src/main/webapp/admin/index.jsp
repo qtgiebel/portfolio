@@ -23,39 +23,29 @@
         <!-- flex right? -->
         <div class="row run-to-bottom">
             <header class="col-2 bg-dark bg-gradient " id="categories-admin-view">
-                <%--
-                        for each category
-                            output a section:
-                                with header: category name
-                                with main:
-                                for each piece in category
-                                    pieces wrapped in buttons
-                                end for
-                            additional button to upload new piece
-                        end for
-                    --%>
+
+                    <%--Loop over each category --%>
                 <c:forEach var="category" items="${categories}">
                 <div class="container py-1">
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
                             <header class="row">
-                                <span class="px-4 py-2 text-light category-name"
-                                data-cat-index="${category.id}">${category.name}</span>
+                                <span class="px-4 py-2 text-light category-name">${category.title}</span>
                             </header>
                             <main class="row row-cols-2">
+
+                                    <%-- Loop over each piece in the category --%>
                                 <c:forEach var="piece" items="${category.pieces}">
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail">
-                                        <img src="${piece.location}" alt="${piece.title}"/>
+                                    <button class="focus img-thumbnail <c:if test="${piece.archived}">red-shift</c:if>">
+                                        <img src="${piece.location}" alt="${piece.title}" data-catIndex="${category.title}"/>
                                     </button>
                                 </div>
                                 </c:forEach>
 
+                                    <%-- Add new image button and dialog --%>
                                 <div class="col py-2">
-                                    <button class="img-thumbnail new-dialog-btn"
-                                            data-catIndex="${category.id}"
-                                            data-dialogId="new-image-${category.id}-dialog">
-
+                                    <button class="img-thumbnail new-dialog-btn" data-dialogId="new-image-${category.id}-dialog">
                                         <img src="/portfolio/images/add-button.jpg" alt="Add new image"/>
                                     </button>
 
@@ -82,15 +72,19 @@
                     </section>
                 </div>
                 </c:forEach>
+
+                    <%--Create new category button --%>
                 <div class="container py-1">
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
                             <header class="row">
-                                <button class="btn btn-dark new-dialog-btn">New Category</button>
+                                <button class="btn btn-dark new-dialog-btn" data-dialogId="new-category-dialog">
+                                    New Category
+                                </button>
                                 <div id="new-category-dialog" class="dialog">
                                     <div class="container rounded-corners dialog-content">
-                                        <span class="close-btn">&times;</span>
-                                        <form action="/admin/addCategory">
+                                        <span class="close-btn" data-dialogId="new-category-dialog">&times;</span>
+                                        <form method="post" action="/portfolio/admin/addCategory">
                                             <div class="my-3">
                                                 <label class="form-label" for="category">Category:</label>
                                                 <input class="form-control" type="text" name="category" id="category">
@@ -104,16 +98,11 @@
                         </div>
                     </section>
                 </div>
-                <!-- Create new category button -->
+
             </header>
             <main class="col-10 max-height" id="piece-admin-view">
-                <!--
-                JS: PANEL onclick
-                    ouput section:
-                        with header: category name
-                        with main: large version of image from og button
-                end JS
-            -->
+
+
                 <div class="navbar bg-light">
                     <div class="container">
                         <div class="float-start">
@@ -133,8 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-secondary run-to-bottom px-4 py-5" id="hero-image">
-                    <!-- <img class="rounded mx-auto d-block" src="" alt="Necronomicon Doodle" /> -->
+                <div class="bg-secondary run-to-bottom px-4 py-5" id="hero-image-container">
                 </div>
             </main>
         </div>
