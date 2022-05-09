@@ -5,8 +5,8 @@
 /docs/screenshots/help
 
 ## Properties files
-src/main/resources/*.properties
-src/main/resources/*.cfg.xml
+src/main/resources
+src/test/resources
 
 ## File-based project format:
 *.iws
