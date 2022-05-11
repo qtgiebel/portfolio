@@ -1,18 +1,22 @@
 package com.quinngiebel.auth.controller;
 
+import com.quinngiebel.admin.entities.User;
+import com.quinngiebel.admin.persistence.UserDao;
+import com.quinngiebel.auth.CognitoJWTParser;
+import com.quinngiebel.auth.CognitoTokenHeader;
+import com.quinngiebel.auth.Keys;
+import com.quinngiebel.auth.KeysItem;
+import com.quinngiebel.auth.TokenResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.apache.commons.io.FileUtils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quinngiebel.admin.entities.User;
-import com.quinngiebel.admin.persistence.UserDao;
-import com.quinngiebel.auth.*;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -57,6 +61,10 @@ public class Auth extends HttpServlet  {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
@@ -83,7 +91,7 @@ public class Auth extends HttpServlet  {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authCode = request.getParameter("code");
-        String ERROR_PAGE = "/portfolio/admin/error.jsp";
+        String ERROR_PAGE = "admin/error.jsp";
 
         if (authCode == null) {
             request.setAttribute("errorMsg", "Could not authorize.");
@@ -122,8 +130,7 @@ public class Auth extends HttpServlet  {
             return;
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin");
-        dispatcher.forward(request, response);
+        response.sendRedirect("/portfolio/admin");
     }
 
     /**
@@ -152,9 +159,9 @@ public class Auth extends HttpServlet  {
     /**
      * Get values out of the header to verify the token is legit. If it is legit, get the claims from it, such
      * as username.
-     * @param tokenResponse
-     * @return An object representation of the authorized user.
-     * @throws IOException
+     * @param tokenResponse The tokens received from cognito.
+     * @return              An object representation of the authorized user.
+     * @throws IOException  Throws IOException if the tokens cannot be read.
      */
     private User validate(TokenResponse tokenResponse) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
