@@ -61,8 +61,8 @@
                                     <%-- Loop over each piece in the category --%>
                                 <c:forEach var="piece" items="${category.pieces}">
                                 <div class="col py-2">
-                                    <button class="focus img-thumbnail <c:if test="${piece.archived}">red-shift</c:if>">
-                                        <img src="${piece.location}" alt="${piece.title}" data-category="${category.title}"/>
+                                    <button class="focus img-thumbnail <c:if test="${piece.archived}">archived</c:if>">
+                                        <img src="${piece.location}" alt="${piece.title}" data-category="${category.title}" data-pieceid="${piece.id}" class="rounded-corners"/>
                                     </button>
                                 </div>
                                 </c:forEach>
@@ -141,8 +141,41 @@
 
                         </div>
                         <div class="float-end">
-                            <button class="btn btn-secondary">Archive</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button id="archive-btn" class="btn btn-secondary new-dialog-btn" data-dialogid="archive-dialog" disabled>Archive</button>
+                            <div id="archive-dialog" class="dialog">
+                                <div class="container rounded-corners dialog-content">
+                                    <span class="close-btn" data-dialogid="archive-dialog">&times;</span>
+                                    <form id="archive-form" method="post" action="/portfolio/admin/archivePiece">
+                                        <p>Confirm</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="confirm-archive" id="confirm-archive" required>
+                                            <label class="form-check-label" for="confirm-archive">Are you sure you want to edit this piece?</label>
+                                        </div>
+                                        <div class="button-box col-12">
+                                            <button id="archive-submit" class="btn btn-secondary" type="submit" disabled>Yes</button>
+                                            <input class="btn btn-dark close-btn-fn" type="reset" value="No" data-dialogid="archive-dialog">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <button id="delete-btn" class="btn btn-danger new-dialog-btn" data-dialogid="delete-dialog" disabled>Delete</button>
+                            <div id="delete-dialog" class="dialog">
+                                <div class="container rounded-corners dialog-content">
+                                    <span class="close-btn" data-dialogid="delete-dialog">&times;</span>
+                                    <form id="delete-form" action="/portfolio/admin/deletePiece" method="post">
+                                        <p>Confirm</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="confirm-delete" id="confirm-delete" required/>
+                                            <label class="form-check-label" for="confirm-delete">Are you sure you want to delete this piece? This action cannot be undone.</label>
+                                        </div>
+                                        <div class="button-box col-12">
+                                            <button id="delete-submit" class="btn btn-danger" type="submit" disabled>Yes</button>
+                                            <input class="btn btn-dark close-btn-fn" type="reset" value="No" data-dialogid="archive-dialog">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
