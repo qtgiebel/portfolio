@@ -24,13 +24,16 @@ body > * {
     margin:0;
     flex-grow: 1;
 }
+
 /* modify thumbnail to fit image correctly */
 .img-thumbnail {
     max-width: 10em;
+    padding: 0;
+    border: none;
 }
-
 .img-thumbnail img {
-    max-width: 75%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* remove list bullets */
@@ -47,13 +50,27 @@ li {
     margin-top: auto;
 }
 
+/* center side by side buttons */
+.button-box {
+    text-align:center;
+    margin-top:20px;
+}
+
+/* add yellow border to archived pieces */
+.archived img {
+    outline: 5px solid rgb(255, 213, 0) !important;
+    outline-offset: -5px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* limit the width of the focused image */
+#focus-image {
+    max-width: 85%;
+}
+
 /* test classes */
-
-
 section {
     background-color: mediumaquamarine;
 }
 
-#focus-image {
-    max-width: 85%;
-}
