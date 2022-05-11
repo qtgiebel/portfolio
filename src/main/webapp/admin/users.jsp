@@ -5,6 +5,9 @@
 
 
 <head>
+    <script type="text/javascript">
+        const userCollection = ${users}; <%--This is being used--%>
+    </script>
     <c:import url="templates/default-head-tags.jsp">
         <c:param name="title" value="Admin Users" />
         <c:param name="page" value="users" />
