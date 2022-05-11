@@ -75,7 +75,7 @@
                 </div>
                 <div class="bg-secondary run-to-bottom px-4 py-5">
                     <div class="container bg-light rounded-corners">
-                        <form action="/portfolio/admin/update-user">
+                        <form action="/portfolio/admin/updateUser" method="post">
                             <div class="container">
                                 <div class="mb-3">
                                     <p id="hero-user" class="form-label pt-6"><c:out value="${verifiedUser.email}"/></p>
