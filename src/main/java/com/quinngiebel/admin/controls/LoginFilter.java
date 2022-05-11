@@ -17,7 +17,6 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-//        Filter.super.init(filterConfig);
     }
 
     @Override
@@ -25,6 +24,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
+
 
         if (session == null || session.getAttribute("verifiedUser") == null) {
             response.sendRedirect(request.getContextPath() + "/logIn");
@@ -36,6 +36,5 @@ public class LoginFilter implements Filter {
 
     @Override
     public void destroy() {
-        Filter.super.destroy();
     }
 }
