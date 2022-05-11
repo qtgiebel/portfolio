@@ -7,7 +7,7 @@
 const focus = (event) => {
     let img = event.target;
     let title = img.alt;
-    let category = img.dataset.catIndex;
+    let category = img.dataset.category;
 
     removeCurrentFocus();
     setCategory(category)
@@ -42,11 +42,17 @@ const setImage = img => {
     imageWrapper.appendChild(displayImage);
 }
 
-const init = () => {
-    let display = document.querySelectorAll(`.focus`);
+const enable = event => {
+    const submitBtn = document.querySelector(`#${event.currentTarget.id}-submit`);
+    submitBtn.disabled ? submitBtn.disabled = true : submitBtn.disabled = false;
+}
 
+const init = () => {
+    const display = document.querySelectorAll(`.focus`);
     display.forEach(button => { button.addEventListener(`click`, focus); });
 
+    const ckBoxes = document.getElementsByName(`permission`);
+    ckBoxes.forEach(node => node.addEventListener(`change`, enable));
     dialogInit();
 }
 

@@ -30,7 +30,31 @@
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
                             <header class="row">
+
                                 <span class="px-4 py-2 text-light category-name">${category.title}</span>
+
+                                    <%-- Delete category button is on hold for a later version --%>
+                                    <%-- Currently being checked by if in portfolio/index.jsp --%>
+                                <%--<div class="col-1">
+                                    <span class="close-btn new-dialog-btn" data-dialogid="delete-category-${category.id}-dialog">&times;</span>
+                                    <div id="delete-category-${category.id}-dialog" class="dialog">
+                                        <div class="container rounded-corners dialog-content">
+                                            <span class="close-btn" data-dialogid="delete-category-${category.id}-dialog">&times;</span>
+                                            <form action="/portfolio/admin/deleteCategory" method="post">
+                                                <div class="my-3">
+                                                    <label class="form-label" for="confirm-delete-${category.id}">Are you sure you want to delete this category?</label>
+                                                    <input class="form-control" type="checkbox" name="confirm-delete" id="confirm-delete-${category.id}" required>
+                                                </div>
+                                                <input type="hidden" name="category" value="${category.id}"/>
+                                                <button class="btn btn-dark" type="submit"
+                                                        id="confirm-delete-${category.id}-submit" disabled>
+                                                    Delete Category
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>--%>
+
                             </header>
                             <main class="row row-cols-2">
 
@@ -38,20 +62,20 @@
                                 <c:forEach var="piece" items="${category.pieces}">
                                 <div class="col py-2">
                                     <button class="focus img-thumbnail <c:if test="${piece.archived}">red-shift</c:if>">
-                                        <img src="${piece.location}" alt="${piece.title}" data-catIndex="${category.title}"/>
+                                        <img src="${piece.location}" alt="${piece.title}" data-category="${category.title}"/>
                                     </button>
                                 </div>
                                 </c:forEach>
 
                                     <%-- Add new image button and dialog --%>
                                 <div class="col py-2">
-                                    <button class="img-thumbnail new-dialog-btn" data-dialogId="new-image-${category.id}-dialog">
-                                        <img src="/portfolio/images/add-button.jpg" alt="Add new image"/>
+                                    <button class="img-thumbnail new-dialog-btn" data-dialogid="new-image-${category.id}-dialog">
+                                        <img src="admin/images/add-button.jpg" alt="Add new image"/>
                                     </button>
 
                                     <div id="new-image-${category.id}-dialog" class="dialog">
                                         <div class="container rounded-corners dialog-content">
-                                            <span class="close-btn" data-dialogId="new-image-${category.id}-dialog">&times;</span>
+                                            <span class="close-btn" data-dialogid="new-image-${category.id}-dialog">&times;</span>
                                             <form action="/portfolio/admin/addPiece" method="post" enctype="multipart/form-data">
                                                 <div class="my-3">
                                                     <label class="form-label" for="title">Title:</label>
@@ -78,12 +102,12 @@
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
                             <header class="row">
-                                <button class="btn btn-dark new-dialog-btn" data-dialogId="new-category-dialog">
+                                <button class="btn btn-dark new-dialog-btn" data-dialogid="new-category-dialog">
                                     New Category
                                 </button>
                                 <div id="new-category-dialog" class="dialog">
                                     <div class="container rounded-corners dialog-content">
-                                        <span class="close-btn" data-dialogId="new-category-dialog">&times;</span>
+                                        <span class="close-btn" data-dialogid="new-category-dialog">&times;</span>
                                         <form method="post" action="/portfolio/admin/addCategory">
                                             <div class="my-3">
                                                 <label class="form-label" for="category">Category:</label>

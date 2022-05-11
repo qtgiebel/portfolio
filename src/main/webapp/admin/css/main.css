@@ -53,3 +53,7 @@ li {
 section {
     background-color: mediumaquamarine;
 }
+
+#focus-image {
+    max-width: 85%;
+}
