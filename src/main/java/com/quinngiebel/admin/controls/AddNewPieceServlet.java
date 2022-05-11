@@ -35,6 +35,9 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Adds a new piece to the database and uploads the image to S3.
+ */
 @WebServlet(name = "AddNewPieceServlet", value = "/admin/addPiece")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,     // 1 MB
@@ -43,9 +46,13 @@ import java.nio.charset.StandardCharsets;
 )
 public class AddNewPieceServlet extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
-    String S3_API_URL;
-    String CDN_DOMAIN;
+    private String S3_API_URL;
+    private String CDN_DOMAIN;
 
+    /**
+     * Initializes the server variables.
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
@@ -55,13 +62,20 @@ public class AddNewPieceServlet extends HttpServlet {
         CDN_DOMAIN = (String) context.getAttribute("CDN_DOMAIN");
     }
 
+    /**
+     * Sends an API request to store the upload in S3 and inserts a new record in the Piece database.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String redirectURL = "/portfolio/admin";
         String s3Location = CDN_DOMAIN;
 
         try {
-            s3Location += this.uploadImage(request.getPart("file"), request.getParameter("title"));
+            s3Location += this.uploadImage(request.getPart("file"));
         } catch (IOException | RuntimeException e) {
             request.setAttribute("errorMsg", "File input error; could not upload.");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("error.jsp");
@@ -82,20 +96,19 @@ public class AddNewPieceServlet extends HttpServlet {
     }
 
     /**
-     *
+     * Encodes the image in Base64 and calls the storage API to store the image in S3.
      * @param file      The Part object of the image being uploaded.
-     * @param fileName  The name of the file.
      * @return          A string that can be used to access the file in S3.
      */
-    public String uploadImage(Part file, String fileName) throws RuntimeException {
+    private String uploadImage(Part file) throws RuntimeException {
         File f = writeTempFile(file);
+        String fileName = file.getSubmittedFileName();
 
         if (f == null) {
             throw new RuntimeException("Failed to write file.");
         }
 
         String encodedImage = encodeImageFile(f);
-        fileName += ("." + FilenameUtils.getExtension(file.getSubmittedFileName()));
         logger.debug("file name: " + fileName);
 
         if (encodedImage == null) {
@@ -118,6 +131,11 @@ public class AddNewPieceServlet extends HttpServlet {
         return fileName;
     }
 
+    /**
+     * Writes a temporary file to store the upload.
+     * @param file  The upload.
+     * @return      A File object that refers to the temp directory the upload was written to.
+     */
     private File writeTempFile(Part file) {
         InputStream fileContent;
         OutputStream outputStream;
@@ -140,6 +158,11 @@ public class AddNewPieceServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Encodes the upload in Base46.
+     * @param file  The upload.
+     * @return      A Base64 representation of the upload.
+     */
     private String encodeImageFile(File file) {
         String encodedString;
 
