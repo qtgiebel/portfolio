@@ -64,7 +64,7 @@ public class AddNewPieceServlet extends HttpServlet {
             s3Location += this.uploadImage(request.getPart("file"), request.getParameter("title"));
         } catch (IOException | RuntimeException e) {
             request.setAttribute("errorMsg", "File input error; could not upload.");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/error.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
             return;
         }
