@@ -3,26 +3,9 @@ const changeValue = event => {
 }
 
 const listUsers = () => {
-    const userList = document.querySelector(`#user-list`);
-    userCollection.users.forEach(user => {
-            const userBox = document.createElement(`div`);
-
-            userBox.classList.add(`col`);
-            userBox.classList.add(`py-2`);
-            userBox.classList.add(`pr-2`);
-
-            const userBtn = document.createElement(`button`);
-            userBtn.style.all = `unset`;
-            userBtn.style.cursor = `pointer`;
-            userBtn.innerText = user.email;
-            userBtn.dataset.userId = user.id;
-
-            userBtn.addEventListener(`click`, focusUser);
-
-            userBox.appendChild(userBtn);
-            userList.appendChild(userBox);
-        }
-    );
+    document.querySelectorAll(`.user-btn`).forEach(user => {
+        user.addEventListener(`click`, focusUser);
+    });
 }
 
 const focusUser = event => {

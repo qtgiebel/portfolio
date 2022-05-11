@@ -26,7 +26,7 @@ public class UsersDisplayServlet extends HttpServlet {
         String forwardUrl = "/admin/users.jsp";
         UserDao userDao = new UserDao();
 
-        request.setAttribute("users", userDao.toJSON(userDao.getAll()));
+        request.setAttribute("users", userDao.getAll());
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardUrl);
         dispatcher.forward(request, response);
