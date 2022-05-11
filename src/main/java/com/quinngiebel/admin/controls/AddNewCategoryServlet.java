@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * Creates a new category.
  *
  * @author Quinn Giebel
  */
-@WebServlet(name = "AddNewCategoryServlet", value = "/add-category")
+@WebServlet(name = "AddNewCategoryServlet", value = "/admin/addCategory")
 public class AddNewCategoryServlet extends HttpServlet {
 
     /**
@@ -27,10 +28,10 @@ public class AddNewCategoryServlet extends HttpServlet {
      * @throws IOException      Throws when the dispatcher cannot be forwarded.
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardURL = "/admin";
 
-        String categoryTitle = request.getParameter("category");
+        String categoryTitle = request.getParameter("category").toLowerCase(Locale.ROOT);
         new CategoryDao().insert(new Category(categoryTitle));
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardURL);
