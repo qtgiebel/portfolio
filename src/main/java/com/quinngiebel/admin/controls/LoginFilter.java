@@ -1,5 +1,6 @@
 package com.quinngiebel.admin.controls;
 
+import com.quinngiebel.admin.entities.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
