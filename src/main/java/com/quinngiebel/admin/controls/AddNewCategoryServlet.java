@@ -3,7 +3,6 @@ package com.quinngiebel.admin.controls;
 import com.quinngiebel.admin.entities.Category;
 import com.quinngiebel.admin.persistence.CategoryDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +28,11 @@ public class AddNewCategoryServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String forwardURL = "/admin";
+        String redirectUrl = "/portfolio/admin";
 
         String categoryTitle = request.getParameter("category").toLowerCase(Locale.ROOT);
         new CategoryDao().insert(new Category(categoryTitle));
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardURL);
-        dispatcher.forward(request, response);
+        response.sendRedirect(redirectUrl);
     }
 }

@@ -19,12 +19,13 @@ import java.io.IOException;
  *
  * @author Quinn Giebel
  */
-@WebServlet(name = "UpdateUserServlet", value = "/admin/update-user")
+@WebServlet(name = "UpdateUserServlet", value = "/admin/updateUser")
 public class UpdateUserServlet extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String redirectUrl = "/portfolio/admin/users";
         UserDao userDao = new UserDao();
         User toUpdate = userDao.getByColumn("id", request.getParameter("userId")).get(0);
 
@@ -46,8 +47,6 @@ public class UpdateUserServlet extends HttpServlet {
 
         userDao.update(toUpdate);
 
-        String forwardUrl = "/admin/users";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardUrl);
-        dispatcher.forward(request, response);
+        response.sendRedirect(redirectUrl);
     }
 }
