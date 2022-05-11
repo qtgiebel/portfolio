@@ -5,9 +5,6 @@
 
 
 <head>
-    <script type="text/javascript">
-        const userCollection = ${users}; <%--List of image objects as JSON TODO:01: make this into an api call--%>
-    </script>
     <c:import url="templates/default-head-tags.jsp">
         <c:param name="title" value="Admin Users" />
         <c:param name="page" value="users" />
