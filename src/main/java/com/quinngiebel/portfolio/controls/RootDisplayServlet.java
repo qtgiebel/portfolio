@@ -21,7 +21,6 @@ public class RootDisplayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardUrl = "/index.jsp";
-        PieceDao pieceDao = new PieceDao();
 
         request.setAttribute("categories", new CategoryDao().getAll());
 
