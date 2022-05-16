@@ -1,6 +1,6 @@
  <%-- Created by IntelliJ IDEA. User: Quinn Date: 2/10/2022 --%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:set var="visitorId" value="xxx"/>
 <html>
 
 
@@ -69,7 +69,7 @@
 
                                     <%-- Add new image button and dialog --%>
                                 <div class="col py-2">
-                                    <button class="img-thumbnail new-dialog-btn" data-dialogid="new-image-${category.id}-dialog">
+                                    <button class="img-thumbnail <c:if test="${verifieduser.id eq visitorId}">new-dialog-btn</c:if>" data-dialogid="new-image-${category.id}-dialog">
                                         <img src="admin/images/add-button.jpg" alt="Add new image"/>
                                     </button>
 
@@ -102,7 +102,7 @@
                     <section class="container bg-secondary rounded-corners my-1 mt-2">
                         <div class="col">
                             <header class="row">
-                                <button class="btn btn-dark new-dialog-btn" data-dialogid="new-category-dialog">
+                                <button class="btn btn-dark <c:if test="${verifieduser.id eq visitorId}">new-dialog-btn</c:if>" data-dialogid="new-category-dialog">
                                     New Category
                                 </button>
                                 <div id="new-category-dialog" class="dialog">
@@ -141,7 +141,7 @@
 
                         </div>
                         <div class="float-end">
-                            <button id="archive-btn" class="btn btn-secondary new-dialog-btn" data-dialogid="archive-dialog" disabled>Archive</button>
+                            <button id="archive-btn" class="btn btn-secondary <c:if test="${verifieduser.id eq visitorId}">new-dialog-btn</c:if>" data-dialogid="archive-dialog" disabled>Archive</button>
                             <div id="archive-dialog" class="dialog">
                                 <div class="container rounded-corners dialog-content">
                                     <span class="close-btn" data-dialogid="archive-dialog">&times;</span>
@@ -159,7 +159,7 @@
                                 </div>
                             </div>
 
-                            <button id="delete-btn" class="btn btn-danger new-dialog-btn" data-dialogid="delete-dialog" disabled>Delete</button>
+                            <button id="delete-btn" class="btn btn-danger <c:if test="${verifieduser.id eq visitorId}">new-dialog-btn</c:if>" data-dialogid="delete-dialog" disabled>Delete</button>
                             <div id="delete-dialog" class="dialog">
                                 <div class="container rounded-corners dialog-content">
                                     <span class="close-btn" data-dialogid="delete-dialog">&times;</span>
